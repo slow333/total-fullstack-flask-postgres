@@ -1,0 +1,33 @@
+<ul class="main-menu">
+    <li><a href="/">Home</a></li>
+    <li class="has-submenu">
+      <a href="/python/">Python/Flask</a>
+      <ul class="sub-menu">
+        <li><a href="/flask/set">Flask Setting</a></li>
+        <li><a href="/flask/jinja2">Jinja2</a></li>
+        <li><a href="/flask/database">Database</a></li>
+        <li><a href="/flask/auth">Form</a></li>
+      </ul>
+    </li>
+    <li class="has-submenu">
+      <a href="/javascript/">JavaScript</a>
+    </li>
+    <li class="has-submenu">
+      <a href="/database/">Database</a>
+    </li>
+    <li class="has-submenu">
+      <a href="/linux/">Linux</a>
+      {% include 'base/_linux-nav.html' %}
+    </li>
+    <li class="has-submenu">
+      <a href="/java/">Java</a>
+    </li>
+    <li class="has-submenu">
+      <a href="/apps/">Apps</a>
+      <ul class="sub-menu">
+        <li><a href="/apps/blog">Blogs</a></li>
+        <li><a href="/apps/todo">Todo</a></li>
+        <li><a href="/apps/topic">Topics</a></li>
+      </ul>
+    </li>
+  </ul>
