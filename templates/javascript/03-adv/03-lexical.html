@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>JavaScript</title>
-  <script src="/js/backup/loadScript.js"></script>
-  <link rel="icon" href="/favicon.ico" />
-  <link href="/css/style.css" rel="stylesheet" >
-</head>
-<body>
-<main>
-  <h1>lexical environment</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} lexical environment {% endblock %}
+
+{% block content %}
   <h2>어려움</h2>
   <section>
     <h2>1단계; 변수</h2>
@@ -55,7 +50,7 @@ console.log( cc() ); // 1</pre>
 console.log( sum(5).toString())
 console.log(sum(0)(1)(2)(3)(4)(5).toString())</pre>
   </section>
-</main>
+{% endblock %}
 
 
 <script>
@@ -90,5 +85,3 @@ function sum(a) {
 console.log( sum(5).toString())
 console.log(sum(0)(1)(2)(3)(4)(5).toString())
 </script>
-</body>
-</html>

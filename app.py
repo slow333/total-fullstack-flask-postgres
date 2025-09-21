@@ -12,6 +12,13 @@ app.register_blueprint(python_bp)
 from bp.routes.database_bp import bp as db_bp
 app.register_blueprint(db_bp)
 
+from bp.routes.spring_bp import bp as spring_bp
+app.register_blueprint(spring_bp)
+
+from bp.routes.js_bp import bp as js_bp
+app.register_blueprint(js_bp)
+
+
 
 # ==============================
 # 공통 적용 사항

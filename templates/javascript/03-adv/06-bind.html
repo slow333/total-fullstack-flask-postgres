@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>JavaScript</title>
-  <script src="/js/backup/loadScript.js"></script>
-  <link rel="icon" href="/favicon.ico" />
-  <link href="/css/style.css" rel="stylesheet" >
-</head>
-<body>
-<main>
-  <h1>bind</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} bind {% endblock %}
+
+{% block content %}
   <section>
     <h2>binding 하기</h2>
     <h3>func.bind(func); this를 func로 지정함</h3>
@@ -58,8 +53,9 @@ user.sayNow("Hello");
 // 출력값 예시:
 // [10:00] John: Hello!</pre>
   </section>
-</main>
-<!--################################################-->
+{% endblock %}
+
+
 <script>
   function partial(func, ...argsBound) {
     return function(...args) { // (*)
@@ -83,5 +79,3 @@ user.sayNow("Hello");
   let sayHi = user2.sayHi;
   sayHi.call(user2, "Hiiii");
 </script>
-</body>
-</html>

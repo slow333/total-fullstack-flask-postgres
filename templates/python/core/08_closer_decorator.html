@@ -1,4 +1,9 @@
-<h1>Closer, decorator</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Python {% endblock %}
+{% block header %} Closer, decorator {% endblock %}
+  
+{% block content %}
 <section>
 <h3>closer</h3>
 <h5>함수 내부에 함수를 정의하고, 내부에 정의된 함수를 return 하는 함수</h5>
@@ -79,3 +84,5 @@ print(next(gen))
 print(next(gen))
 print(next(gen))</pre>
 </section>
+
+{% endblock %}

@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>thymeleaf templates setting</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} thymeleaf templates setting {% endblock %}
+
+{% block content %}
   <h2>url : http://localhost:8080/question/list</h2>
   <section>
     <h2>질문목록 URL mapping</h2>
@@ -31,6 +30,4 @@ implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'</pre>
     <h3>controller에 @ResponseBody를 삭제하고 html 파일 이름으로 변경한다.</h3>
     <h3>/question/list 하면 페이지가 보임.</h3>
   </section>
-</main>
-</body>
-</html>
+{% endblock %}

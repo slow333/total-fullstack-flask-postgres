@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>스프링 부트 2.7 시큐리티 5.7 관련 설정</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} 스프링 부트 2.7 시큐리티 5.7 관련 설정 {% endblock %}
+
+{% block content %}
   <h2>web(front-end) => d:/javascript/homepage-js</h2>
   <h2>Backend => d:/spring/restapi2.7</h2>
   <h3>lombok setting version 1.18.36 다른 버젼은 안됨</h3>
@@ -124,8 +123,4 @@ public class SecurityConfig {
     <h2>UserSecurityService 설정(UserDetailsService)</h2>
     <h3>권한 인증 관련 객체(User)를 생성</h3>
   </section>
-</main>
-<script>
-</script>
-</body>
-</html>
+{% endblock %}

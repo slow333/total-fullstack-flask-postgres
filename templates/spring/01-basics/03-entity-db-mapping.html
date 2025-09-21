@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>entity로 테이블 메핑하기</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} entity로 테이블 메핑하기 {% endblock %}
+
+{% block content %}
   <section>
     <h2>엔티티 속성 구성하기</h2>
     <h3>엔티티는 데이터베이스 테이블과 매핑되는 자바 클래스</h3>
@@ -87,6 +86,4 @@ public class Answer {
 <section>
   <h2>h2-console에 가면 DB table이 생성되어 있음(없으면 서버 재시작)</h2>
 </section>
-</main>
-</body>
-</html>
+{% endblock %}

@@ -1,6 +1,7 @@
 <!doctype html>
 <head>
   <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="icon" href="/static/favicon.ico">
   {% block import %}{% endblock %}
   <title>{% block title %}{% endblock %}</title>
 </head>
@@ -16,49 +17,9 @@
     {% block content %}{% endblock %}
   </main>
   {% block script %}{% endblock %}
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const menuItems = document.querySelectorAll('.navbar-btn');
-        menuItems.forEach( menuItem => {
-          menuItem.addEventListener('click', function (e) {
-            e.preventDefault();
-            switch (menuItem.id) {
-              case 'python':
-                loadByFile('/static/nav-html/_python-nav.html');
-                break;
-              case 'java':
-                loadByFile('/static/nav-html/_java-nav.html');
-                break;
-              case 'spring':
-                loadByFile('/static/nav-html/_spring-nav.html');
-                break;
-                case 'database':
-                loadByFile('/static/nav-html/_database-nav.html');
-                break;
-              case 'apps':
-                loadByFile('/static/nav-html/_apps-nav.html');
-                break;
-              case 'javascript':
-                loadByFile('/static/nav-html/_javascript-nav.html');
-                break;
-              case 'dom':
-                loadByFile('/static/nav-html/_dom-nav.html');
-                break;                
-              default:
-                loadByFile('/static/nav-html/_home-nav.html');
-                break;
-            }
-          })
-        })
-      });
-    function loadByFile(file_uri) {
-      fetch(file_uri)
-        .then(response => response.text())
-        .then(data => {
-          sub_menu = document.querySelector('.sub-menu')
-          sub_menu.innerHTML = data
-        })
-    }  
+  <script type="module">
+    import { selectNavItems } from "/static/js/selectNav.js";
+    selectNavItems()
   </script>
 </body>
 </html>

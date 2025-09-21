@@ -1,4 +1,9 @@
-<h1>datatype</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Python {% endblock %}
+{% block header %} datatype {% endblock %}
+  
+{% block content %}
 <section>
 <h3>데이터 타입에는 int, float, str, dict, list, tuple, set, bool 등이 있다.</h3>
 <p>type() : 함수를 이용하여 데이터 타입을 확인할 수 있다.</p>
@@ -277,8 +282,8 @@ a = 3
 b = 5  
 a, b = b, a  </pre>
 </section>
-<section>
 
+<section>
 <!-- 형변환 ========================= -->
 <h2>형변환</h2>
 <p>int('123') # '123'을 정수로 변환<br />
@@ -302,3 +307,4 @@ tuple[0][0] # 'a'<br />
 list(tuple) # [('a', 1), ('b', 2), ('c', 3)]<br />
 set(tuple) # {('a', 1), ('b', 2), ('c', 3)}</p>
 </section>
+{% endblock %}

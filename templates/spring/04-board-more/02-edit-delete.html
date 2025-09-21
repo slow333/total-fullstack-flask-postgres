@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>수정과 삭제 기능 추가</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} 수정과 삭제 기능 추가 {% endblock %}
+
+{% block content %}
 <section>
   <h2>수정일시 추가</h2>
   <h3>question, answer entity에 modifyDate 추가</h3>
@@ -131,6 +130,4 @@ Array.from(delete_elements).forEach(function(element) {
   <h3>question_detail.html에 수정일 추가 하기</h3>
   <h4>th:text를 2개 넣으면 안되고, 필요시 tag를 만들어서 내용을 추가해야함</h4>
 </section>
-</main>
-</body>
-</html>
+{% endblock %}

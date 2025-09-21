@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>JavaScript</title>
-  <script src="/js/backup/loadScript.js"></script>
-  <link rel="icon" href="/favicon.ico" />
-  <link href="/css/style.css" rel="stylesheet" >
-</head>
-<body>
-<main>
-  <h1>call/apply, 데코레이터, 포워딩</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} call/apply, 데코레이터, 포워딩 {% endblock %}
+
+{% block content %}
   <p>데코레이터는 함수를 감싸는 래퍼로 함수의 행동을 변화시킵니다. 주요 작업은 여전히 함수에서 처리합니다.</p>
   <p>데코레이터는 함수에 추가된 ‘기능’ 혹은 ‘상(相, aspect)’ 정도로 보시면 됩니다.
     하나 혹은 여러 개의 데코레이터를 추가해도 함수의 코드는 변경되지 않습니다.</p>
@@ -93,8 +88,9 @@ alert( "다시 호출: " + worker.slow(3, 5) ); // 동일한 결과 출력(캐�
 let f1000 = delay(alert, 1000);
 f1000("test"); // shows "test" after 1000ms</pre>
   </section>
-</main>
-<!--################################################-->
+
+{% endblock %}
+
 <script>
   let worker = {
     someValue() {
@@ -130,5 +126,3 @@ f1000("test"); // shows "test" after 1000ms</pre>
   console.log( worker.slow(3, 5) ); // 제대로 동작합니다.
   console.log(  "다시 호출: " + worker.slow(3, 5) ); // 동일한 결과 출력(캐시된 결과)
 </script>
-</body>
-</html>

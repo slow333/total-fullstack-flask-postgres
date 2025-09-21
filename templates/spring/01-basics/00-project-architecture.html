@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>spring boot project 구조</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} spring boot project 구조 {% endblock %}
+
+{% block content %}
   <h2>spring 페이지의 게시판은 spring boot 3.4.2, spring security 6.4</h2>
   <h2>restapi 페이지는 spring boot 2.7, spring security 5.7</h2>
   <h3> 둘 사이에 시큐리티 설정에 차이가 있음</h3>
@@ -34,8 +33,7 @@
   <section>
     <div id="testout"></div>
   </section>
-</main>
-</body>
+{% endblock %}
 <script>
   // let urls = ["hello", "greeting"];
   // let requests = urls.map(url => fetch(`http://localhost:8090/${url}`));
@@ -63,4 +61,3 @@
   //           testout.innerHTML += "<div>" +text + "</div>";
   //         });
 </script>
-</html>

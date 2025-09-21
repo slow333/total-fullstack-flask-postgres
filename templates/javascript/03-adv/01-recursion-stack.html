@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>JavaScript</title>
-  <script src="/js/backup/loadScript.js"></script>
-  <link rel="icon" href="/favicon.ico" />
-  <link href="/css/style.css" rel="stylesheet" >
-</head>
-<body>
-<main>
-  <h1>재귀와 스택</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} 재귀와 스택 {% endblock %}
+
+{% block content %}
   <section>
     <h2>pow(x, n)</h2>
     <pre>function pow(x, n) {
@@ -74,7 +69,9 @@ function sumValue(obj) {
     return fib(n-1) + fib(n-2);
   }</pre>
   </section>
-</main>
+{% endblock %}
+
+
 <script>
 function fib(n) {
   if(n <= 1) return n;
@@ -113,5 +110,3 @@ function sumValue(list) {
 }
 console.log(  sumValue(list))
 </script>
-</body>
-</html>

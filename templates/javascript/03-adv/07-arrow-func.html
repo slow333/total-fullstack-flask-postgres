@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>JavaScript</title>
-  <script src="/js/backup/loadScript.js"></script>
-  <link rel="icon" href="/favicon.ico" />
-  <link href="/css/style.css" rel="stylesheet" >
-</head>
-<body>
-<main>
-  <h1>화살표 함수 다시 보기</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} 화살표 함수 다시 보기 {% endblock %}
+
+{% block content %}
   <section>
     <h2>화살표 함수에는 'this'가 없습니다.</h2>
     <pre>let group = {
@@ -48,8 +43,8 @@ function sayHi(who) {
 let sayHiDeferred = defer(sayHi, 2000);
 sayHiDeferred("철수"); // 2초 후 "안녕, 철수"가 출력됩니다.</pre>
   </section>
-</main>
-<!--################################################-->
+{% endblock %}
+
 <script>
   let group = {
     title: "1모둠",
@@ -77,5 +72,3 @@ sayHiDeferred("철수"); // 2초 후 "안녕, 철수"가 출력됩니다.</pre>
   let sayHiDeferred = defer(sayHi, 2000);
   sayHiDeferred("철수"); // 2초 후 "안녕, 철수"가 출력됩니다.
 </script>
-</body>
-</html>

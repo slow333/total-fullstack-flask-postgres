@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} String {% endblock %}
+
+{% block content %}
   <section>
     <h2>string indexOf; str.indexOf('id', 2); 2부터 찾음</h2>
     <pre>  let str = 'As sly as a fox, as strong as an ox';
@@ -42,7 +42,9 @@ alert( '𩷶'.length ); // 2, 사용 빈도가 낮은 중국어(상형문자)</p
     <pre>alert( '𝒳'[0] ); // 이상한 기호가 출력됨
 alert( '𝒳'[1] ); // 서로게이트 쌍의 일부가 출력됨</pre>
   </section>
-</main>
+{% endblock %}
+  
+
 <script>
   let str = 'As sly as a fox, as strong as an ox';
   let pos = 0;
@@ -55,5 +57,3 @@ alert( '𝒳'[1] ); // 서로게이트 쌍의 일부가 출력됨</pre>
     pos = foundPos +1;
   }
 </script>
-</body>
-</html>

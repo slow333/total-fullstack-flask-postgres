@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>spring boot cors 설정</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} spring boot cors 설정 {% endblock %}
+
+{% block content %}
   <section>
     <h2>CORS Config 클래스( config.java )</h2>
 <pre>
@@ -49,8 +48,8 @@ maxAge : 원하는 시간만큼 pre-flight 요청에 대한 응답을 브라우�
   <section>
     <div id="testout" class="testResult"></div>
   </section>
-</main>
-</body>
+{% endblock %}
+
 <script>
   async function testSpringBoot(url) {
     let response = await fetch(url);
@@ -63,4 +62,3 @@ maxAge : 원하는 시간만큼 pre-flight 요청에 대한 응답을 브라우�
             testout.innerHTML = data;
           });
 </script>
-</html>

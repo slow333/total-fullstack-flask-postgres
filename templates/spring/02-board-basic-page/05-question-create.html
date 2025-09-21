@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-  <h1>question create</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} question create {% endblock %}
+
+{% block content %}
   <section>
     <h2>add create button on list</h2>
     <pre>
@@ -38,6 +37,4 @@
   } </pre>
     <h4>service에 addQuestion 생성</h4>
   </section>
-</main>
-</body>
-</html>
+{% endblock %}

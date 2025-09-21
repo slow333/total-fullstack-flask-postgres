@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-  <h1>Date 객체와 날짜</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} Date 객체와 날짜 {% endblock %}
+
+{% block content %}
   <section>
     <h2>객체 생성하기</h2>
     <h3>new Date(milliseconds)</h3>
@@ -93,7 +92,8 @@ function getLastDayOfMonth(year, month) {
   return date.getDate();
 }</pre>
   </section>
-</main>
+{% endblock %}
+  
 <script>
 // let date = new Date(2012,1,20,3,12);
 // console.log(date.toLocaleString());
@@ -104,7 +104,4 @@ function getWeekDay(date) {
   let week = [ 'MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU' ];
   return week[day];
 }
-
 </script>
-</body>
-</html>

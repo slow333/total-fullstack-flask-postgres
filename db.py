@@ -1,9 +1,12 @@
+import os
 import psycopg2
 import psycopg2.extras
 
 import click
 from flask import current_app, g
 
+# os.environ.get('DATABASE_URL')
+# DATABASE = os.environ['DATABASE_URL']
 DATABASE = 'postgresql://postgres:1111@localhost/flaskr'
 
 def get_db():

@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>상세 페이지 만들기</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} 상세 페이지 만들기 {% endblock %}
+
+{% block content %}
   <p>질문제목을 클릭하면 해당 질문과 관련된 상세 페이지로 이동</p>
   <section>
 <!--/*  ####### service ########## */-->
@@ -63,6 +62,4 @@ th:text="${question.content}"  </pre>
   </section>
   <section>
   </section>
-</main>
-</body>
-</html>
+{% endblock %}

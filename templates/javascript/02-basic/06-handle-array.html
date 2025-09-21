@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-  <h1>Array</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} Array {% endblock %}
+
+{% block content %}
   <section>
     <h2>push, pop, shift, unshift</h2>
     <h3>arr.shift(); 맴앞에 것을 삭제하고 나머지를 반환</h3>
@@ -151,21 +150,4 @@ alert(someUsers.length); // 2</pre>
 let strings = ["Hare", "Krishna", "Hare", "Krishna", "Krishna", "Krishna", "Hare", "Hare", ":-O"];
 alert( unique(strings) ); // Hare, Krishna, :-O</pre>
   </section>
-
-</main>
-<script>
-  // let numbers = [];
-  // while (true) {
-  //   let value = prompt("숫자를 입력해 주세요.", 0);
-  //   if (value === "" || value === null || !isFinite(value)) break;
-  //   numbers.push(+value);
-  // }
-  //
-  // let sum = 0;
-  // for (let number of numbers) {
-  //   sum += number;
-  // }
-  // console.log(sum);
-</script>
-</body>
-</html>
+{% endblock %}

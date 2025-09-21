@@ -1,28 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-  <h1>Validation</h1>
-  <section>
-    <h2>build.gradle</h2>
-    <pre>implementation 'org.springframework.boot:spring-boot-starter-validation'</pre>
-    <h2>Spring Boot Validation을 설치하면 애너테이션을 사용 가능</h2>
-    <h3>@Size : 문자 길이를 제한.</h3>
-    <h3>@NotNull, @NotEmpty : Null, Null 또는 빈 문자열("")을 허용하지 않는다.</h3>
-    <h3>@Past ,@Future : 과거/미래 날짜만 입력할 수 있다.</h3>
-    <h3>@FutureOrPresent :미래 또는 오늘 날짜만 입력할 수 있다.</h3>
-    <h3>@Max , @Min</h3>
-    <h3>@Pattern : 입력값을 정규식 패턴으로 검증한다.</h3>
-    <h3>Spring Boot Validation 라이브러리의 보다 많은 기능: https://beanvalidation.org/ 참고</h3>
-  </section>
-  <section>
-    <h2>validation 순서-question</h2>
+{% extends 'base/base.html' %}
 
-    <h3>form class 만들기</h3>
-    <h4>검증을 위한 별도의 QuestionForm class를 만들어 binding할 form 내용을 정의</h4>
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} Validation {% endblock %}
+
+{% block content %}
+<section>
+  <h2>build.gradle</h2>
+  <pre>implementation 'org.springframework.boot:spring-boot-starter-validation'</pre>
+  <h2>Spring Boot Validation을 설치하면 애너테이션을 사용 가능</h2>
+  <h4>@Size : 문자 길이를 제한.</h4>
+  <h4>@NotNull, @NotEmpty : Null, Null 또는 빈 문자열("")을 허용하지 않는다.</h4>
+  <h4>@Past ,@Future : 과거/미래 날짜만 입력할 수 있다.</h4>
+  <h4>@FutureOrPresent :미래 또는 오늘 날짜만 입력할 수 있다.</h4>
+  <h4>@Max , @Min</h4>
+  <h4>@Pattern : 입력값을 정규식 패턴으로 검증한다.</h4>
+  <h4>Spring Boot Validation 라이브러리의 보다 많은 기능: https://beanvalidation.org/ 참고</h4>
+</section>
+<section>
+  <h2>validation 순서-question</h2>
+
+  <h4>form class 만들기</h4>
+  <h5>검증을 위한 별도의 QuestionForm class를 만들어 binding할 form 내용을 정의</h5>
 <pre>
 @Getter
 @Setter
@@ -35,15 +34,15 @@ public class QuestionForm {
   private String content;
 }</pre>
 
-    <h3>질문 내용을 저장하는 controller에 내용 정의하기</h3>
-    <h4>error가 있으면 기존에 수정하던 페이지로 돌아가야 함</h4>
-    <h4>매개 변수 @RequestParam을 전부 @Valid 속성으로 변경,
-      Binding하면 RequestParam에 있는 같은 이름에 대해 자동으로 생성</h4>
-    <pre>@RequestParam(value = "subject") String subject,
-      @RequestParam(value = "content") String content
+  <h4>질문 내용을 저장하는 controller에 내용 정의하기</h4>
+  <h5>error가 있으면 기존에 수정하던 페이지로 돌아가야 함</h5>
+  <h5>매개 변수 @RequestParam을 전부 @Valid 속성으로 변경,
+    Binding하면 RequestParam에 있는 같은 이름에 대해 자동으로 생성</h5>
+  <pre>@RequestParam(value = "subject") String subject,
+    @RequestParam(value = "content") String content
 ==>   @Valid QuestionForm questionForm, BindingResult bindingResult
-    if(bindingResult.hasErrors()) { return "question_form }</pre>
-    <pre>
+  if(bindingResult.hasErrors()) { return "question_form }</pre>
+  <pre>
 @PostMapping("/create")
   public String questionCreate(@Valid QuestionForm questionForm,
                                BindingResult bindingResult) {
@@ -54,53 +53,52 @@ public class QuestionForm {
     return "redirect:/question/list";
   } </pre>
 
-    <h3>템플릿 수정</h3>
-    <h4>form에 th:object="${questionForm}"으로 객체 주입</h4>
+    <h4>템플릿 수정</h4>
+    <h5>form에 th:object="${questionForm}"으로 객체 주입</h5>
     <h5>th:object 속성은 form의 입력 항목들이 QuestionFrom과 연결된다는 것을 타임리프레 알려줌</h5>
-    <pre>
-&lt;form th:action="@{/question/create}" th:object="${questionForm}" method="post">
-  &lt;div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-      &lt;div th:each="err : ${#fields.allErrors()}" th:text="${err}" />
-  &lt;/div>
-    </pre>
-
-    <h3>해당 페이지로 url mapping되는 controller에 QuestionFrom을 매개 변수로 넣어 줘야 애러가 출력됨</h3>
+<form th:action="@{/question/create}" th:object="${questionForm}" method="post">
+  <div class="alert alert-danger" role="alert" th:if="${\#fields.hasAnyErrors()}">
+      <div th:each="err : ${\#fields.allErrors()}" th:text="${err}" />
+  </div>
+    <h4>해당 페이지로 url mapping되는 controller에 QuestionFrom을 매개 변수로 넣어 줘야 애러가 출력됨</h4>
     <pre>
   @GetMapping("/create")
   public String questionCreate(QuestionForm questionForm) {
     return "question_form";
-  }      </pre>
-    <h3>오류 처리: 입력값 유지</h3>
-    <h4>form의 입력 값에 대해 name="content"를 th:field="*{content}"로 변경</h4>
+  }      
+</pre>
+    <h4>오류 처리: 입력값 유지</h4>
+    <h5>form의 입력 값에 대해 name="content"를 th:field="*{content}"로 변경</h5>
     <pre>
-&lt;input type="text" th:field="*{subject}" class="form-control">
+      <input type="text" th:field="*{subject}" class="form-control">
     </pre>
 
-    <h3>공통 템플릿 만들기: 애러 페이지 만들기</h3>
-    <pre>// file name form_errors.html
-  &lt;div th:fragment="formErrorsFragment"
-      th:if="${#fields.hasAnyErrors()}" id="error-form">
-    &lt;div th:each="err: ${#fields.allErrors()}" th:text="${err}">&lt;/div>
-  &lt;/div>    </pre>
-    <h4>사용하기</h4>
-    <pre>&lt;div th:replace="~{form_errors :: formErrorsFragment}">&lt;/div></pre>
+    <h4>공통 템플릿 만들기: 애러 페이지 만들기</h4>
+    <xmp>// file name form_errors.html
+  <div th:fragment="formErrorsFragment"  th:if="${\#fields.hasAnyErrors()}" id="error-form">
+    <div th:each="err: ${\#fields.allErrors()}" th:text="${err}"> </div>
+    </div>
+  </xmp>
+    <h5>사용하기</h5>
+    <xmp>
+      <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+    </xmp>
   </section>
-
 
   <section>
     <h2>answer validation</h2>
-    <h3>answer form class 만들기</h3>
-    <pre>
+    <h4>answer form class 만들기</h4>
+    <xmp>
 @Getter
 @Setter
 public class AnswerForm {
   @NotEmpty(message="content는 필수 입니다.")
   private String content;
-}    </pre>
+}    </xmp>
 
-    <h3>answer 저장 controller 수정</h3>
-    <h4>error가 있으면 기존에 수정하던 페이지로 돌아가야 함</h4>
-    <pre>
+    <h4>answer 저장 controller 수정</h4>
+    <h5>error가 있으면 기존에 수정하던 페이지로 돌아가야 함</h5>
+    <xmp>
   @PostMapping("/answer/create/{question_id}")
   public String createAnswer(Model model,
                              @PathVariable("question_id") Integer question_id,
@@ -113,30 +111,28 @@ public class AnswerForm {
     }
     this.answerService.create(question, answerForm.getContent());
     return String.format("redirect:/sbb-UI/question/question_detail/%s", question_id);
-  }    </pre>
+  }    </xmp>
 
-    <h3>애러 출력될 templates에 answerForm 객체 주입</h3>
+    <h4>애러 출력될 templates에 answerForm 객체 주입</h4>
     <pre>
   @GetMapping(value={"/question_detail/{id}", "/question_detail"})
   public String detailQuestion(Model model,
                                @PathVariable(required = false) Integer id,
-                               AnswerForm answerForm) {
+                               AnswerForm answerForm) {}
     </pre>
 
-    <h3>answer form 이 있는 곳을 수정(question_detail)</h3>
-    <pre>
-  &lt;form th:action="@{|/sbb-UI/answer/create/${question.id}|}"
+    <h4>answer form 이 있는 곳을 수정(question_detail)</h4>
+    <xmp>
+  <form th:action="@{|/sbb-UI/answer/create/${question.id}|}"
            th:object="${answerForm}" method="post">
-    &lt;div th:replace="~{/sbb-UI/utils/form_errors :: formErrorsFragment}">&lt;/div>
+    <div th:replace="~{/sbb-UI/utils/form_errors :: formErrorsFragment}"></div>
      ....
-  &lt;/form>
-    </pre>
+  </form>
+    </xmp>
 
-    <h3>입력값 유지</h3>
-    <pre>
-  &lttextarea th:field="*{content}" id="content" cols="40" rows="4"> &lt;/textarea>
-    </pre>
+    <h4>입력값 유지</h4>
+    <xmp>
+  <textarea th:field="*{content}" id="content" cols="40" rows="4"> </textarea>
+    </xmp>
   </section>
-</main>
-</body>
-</html>
+{% endblock %}

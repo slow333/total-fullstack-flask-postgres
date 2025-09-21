@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-  <h1>형변환</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} 형변환 {% endblock %}
+
+{% block content %}
   <section>
     <h2>문자형 변환 :String(value); num + '';</h2>
     <p>""로 더하기 하면 문자료 변환됨</p>
@@ -53,6 +52,4 @@ alert(a == b); // true!</pre>
     <h3>height = height ?? 100; // height가 undefined 또는 null 이면 100을 할당</h3>
     <h3>height가 0이면 0이 할당됨. </h3>
   </section>
-</main>
-</body>
-</html>
+{% endblock %}

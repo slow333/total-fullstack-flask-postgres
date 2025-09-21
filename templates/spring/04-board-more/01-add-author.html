@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>글쓴이 항목 추가</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} 글쓴이 항목 추가 {% endblock %}
+
+{% block content %}
 <section>
   <h2>entity에 UserInfo 프로퍼티 추가</h2>
 <pre>public class Question {
@@ -139,6 +138,4 @@ public class SecurityConfig {
 &lt;span th:if="${question.author != null}"
   th:text="${question.author.username}">&lt;/span></pre>
 </section>
-</main>
-</body>
-</html>
+{% endblock %}

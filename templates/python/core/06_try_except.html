@@ -1,4 +1,9 @@
-<h1>try, except, finally</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Python {% endblock %}
+{% block header %} try, except, finally {% endblock %}
+  
+{% block content %}
 <section>
 <pre>def say_nick(nick):
     if nick == &#39;바보&#39;:
@@ -53,3 +58,5 @@ except ZeroDivisionError:
     # Code to handle the specific error
     print("Cannot divide by zero!")</pre>
 </section>
+
+{% endblock %}

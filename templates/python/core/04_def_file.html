@@ -1,4 +1,9 @@
-<h3>def: 함수</h3>
+{% extends 'base/base.html' %}
+
+{% block title %} Python {% endblock %}
+{% block header %} def: 함수 {% endblock %}
+  
+{% block content %}
 <section>
   <h3>함수 사용 방법</h3>
 <pre>def add_many(*args):
@@ -131,3 +136,4 @@ data = pickle.load(f)
 print(data)
 f.close()</pre>
 </section>
+{% endblock %}

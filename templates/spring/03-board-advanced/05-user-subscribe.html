@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>회원 가입 기능</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} 회원 가입 기능 {% endblock %}
+
+{% block content %}
 <section>
   <h2>회원 가입 기능 구성</h2>
   <p>회원 가입 기능을 구현하려면 회원 정보와 관련된 데이터를 저장하고 이를 관리하는 엔티티와 리포지터리 등을 만들어야 하고, 폼과 컨트롤러와 같은 요소를 생성해 사용자로부터 입력받은 데이터를 웹 프로그램에서 사용할 수 있도록 만들어야 한다.</p>
@@ -53,10 +52,10 @@ public class User {
     private String email;
   } </pre>
   <h2>repository interface 생성</h2>
-<pre>
-  public interface UserRepository extends JpaRepository&lt;User, Integer>{
+<xmp>
+  public interface UserRepository extends JpaRepository<User, Integer>{
 
-  }</pre>
+  }</xmp>
   <h2>service class 생성</h2>
 <pre>
 @RequiredArgsConstructor
@@ -134,31 +133,29 @@ public class UserController {
     e.getMessage()를 사용했다. 여기서 bindingResult.reject(오류 코드, 오류 메시지)는
     UserCreateForm의 검증에 의한 오류 외에 일반적인 오류를 발생시킬 때 사용한다.</h3>
   <h2>template 만들기</h2>
-  <pre>
-  &lt;div class="subscribe">
-    &lt;h1>가입 하세요&lt;/h1>
-    &lt;form th:action="@{|/user/create|}" class="subscribe-form"
+  <xmp>
+  <div class="subscribe">
+    <h1>가입 하세요</h1>
+    <form th:action="@{|/user/create|}" class="subscribe-form"
       th:object="${userForm}" method="post">
-      &lt;div th:replace="~{/sbb-UI/utils/form_errors :: formErrorsFragment}">&lt;/div>
+      <div th:replace="~{/sbb-UI/utils/form_errors :: formErrorsFragment}"></div>
 
-      &lt;div>
-        &lt;input type="text" id="username" th:field="*{username}"
+      <div>
+        <input type="text" id="username" th:field="*{username}"
             placeholder="username">
-      &lt;/div>
-      &lt;div>
-        &lt;input type="password" id="password" name="password"
+      </div>
+      <div>
+        <input type="password" id="password" name="password"
             placeholder="password">
-      &lt;/div>
-      &lt;div>
-        &lt;input type="text" id="password" th:field="*{email}"
+      </div>
+      <div>
+        <input type="text" id="password" th:field="*{email}"
            placeholder="email">
-      &lt;/div>
-      &lt;div>
-        &lt;input type="submit" value="SUBMIT" id="login-btn">
-      &lt;/div>
-    &lt;/form>
-  &lt;/div>  </pre>
+      </div>
+      <div>
+        <input type="submit" value="SUBMIT" id="login-btn">
+      </div>
+    </form>
+  </div>  </xmp>
 </section>
-</main>
-</body>
-</html>
+{% endblock %}

@@ -1,5 +1,53 @@
-<h1>DB Setup(postgresql): Core 방식, ORM 방식 아님</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Flask {% endblock %}
+{% block header %} psycopg2를 통한 db 연결 {% endblock %}
+  
+{% block content %}
+<section> 
+  <pre>
+import os
+import psycopg2
+import psycopg2.extras
+
+from flask import g
+
+# os evn에서 가져오기
+# window에서는 환경 변수에 추가
+# linux에서는 => /etc/profile에 추가 또는 ~/.bashrc에 추가
+  export DATABASE=postgresql://postgres:1234@192.168.219.101:5432/mydb
+# 아니면 여기에 변수를 생성해서 주입해야함
+
+MY_DB = os.environ.get('MY_DB')
+FLASK_DB = os.environ.get('FLASK_DB')
+
+# db 2개를 생성해서 사용(이럴 일이 있나 싶내요)
+def get_mydb():
+  """Get a database connection from the application context."""
+  if 'mydb' not in g:
+    g.mydb = psycopg2.connect(MY_DB, cursor_factory=psycopg2.extras.DictCursor)
+  if 'flask_db' not in g:
+    g.flask_db = psycopg2.connect(flask_db, cursor_factory=psycopg2.extras.DictCursor)
+  return g.mydb, g.flask_db
+
+def close_db(e=None):
+  """Close the database connection."""
+  mydb = g.pop('mydb', None)
+  if mydb is not None:
+    mydb.close()
+
+  flask_db = g.pop('flask_db', None)
+  if flask_db is not None:
+    flask_db.close()
+
+def init_app(app):
+  """Register database functions with the Flask app."""
+  app.teardown_appcontext(close_db)
+</pre>
+</section>
+
 <section>
+  <h1>DB Setup(postgresql): Core 방식, ORM 방식 아님</h1>
   <h3>DB 연결 및 테이블 생성, 주입</h3>
   <h4>sqlalchemy 1.3.2 기준</h4>
   <pre>from sqlalchemy import create_engine, MetaData
@@ -21,3 +69,4 @@ addresses = Table('addresses', metadata,
 )
 metadata.create_all(engine)  </pre>
 </section>
+{% endblock %}

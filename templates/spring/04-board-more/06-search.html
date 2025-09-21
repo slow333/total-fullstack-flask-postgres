@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>검색 기능</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} 검색 기능 {% endblock %}
+
+{% block content %}
 <section>
   <h2>JPA의 Specification interface</h2>
 <p>앞의 쿼리에서 본 것과 같이 여러 테이블에서 데이터를 검색해야 할 경우에는 JPA가 제공하는 Specification 인터페이스를 사용하는 것이 편리하다. 이 인터페이스는 DB 검색을 더 유연하게 다룰 수 있고, 복잡한 검색 조건도 처리할 수 있다.</p>
   <h2>질문 리포지터리 수정하기</h2>
-  <pre>
+  <xmp>
     @Query("select "
       + "distinct q "
       + "from Question q "
@@ -23,31 +22,31 @@
       + "   or u1.username like %:kw% "
       + "   or a.content like %:kw% "
       + "   or u2.username like %:kw% ")
-    Page&lt;Question> findAllByKeyword(@Param("kw") String kw, Pageable pageable);  </pre>
+    Page<Question> findAllByKeyword(@Param("kw") String kw, Pageable pageable);  </xmp>
   <p>여기서는 @Query 애너테이션이 적용된 findAllByKeyword 메서드를 추가했다. 앞에서 살펴본 쿼리를 @Query로 구현한 것이다. 이때 @Query는 반드시 테이블 기준이 아닌 엔티티 기준으로 작성해야 한다. 즉, site_user와 같은 테이블명 대신 SiteUser처럼 엔티티명을 사용해야 하고, 조인문에서 보듯이 q.author_id=u1.id와 같은 컬럼명 대신 q.author=u1처럼 엔티티의 속성명을 사용해야 한다.</p>
   <p>그리고 @Query에 매개변수로 전달할 kw 문자열은 메서드의 매개변수에 @Param("kw")처럼 @Param 애너테이션을 사용해야 한다. 검색어를 의미하는 kw 문자열은 @Query 안에서 :kw로 참조된다.</p>
 
   <h2>질문 서비스 수정하기</h2>
-  <pre>
-public Page&lt;Question> getList(int page, String kw) {
-    List&lt;Sort.Order> sorts = new ArrayList<>();
+  <xmp>
+public Page<Question> getList(int page, String kw) {
+    List<Sort.Order> sorts = new ArrayList<>();
     sorts.add(Sort.Order.desc("createDate"));
     Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
     return this.questionRepository.findAllByKeyword(kw, pageable);
-}  </pre>
+}  </xmp>
   <p>Specification 인터페이스를 사용하기 위해 작성했던 내용 대신 이와 같이 작성해도 동일하게 동작할 것이다. 이와 같이 SQL을 알고, @Query 애너테이션을 사용한다면 검색 기능을 좀 더 간단하게 구현할 수 있다.</p>
   <h3>Specification 사용하기</h3>
-  <pre>
-private Specification&lt;Question> search(String kw) {
-    return new Specification&lt;>() {
+  <xmp>
+private Specification<Question> search(String kw) {
+    return new Specification<>() {
       private static final long serialVersionUID = 1L;
       @Override
-      public Predicate toPredicate(Root&lt;Question> q, CriteriaQuery&lt;?> query,
+      public Predicate toPredicate(Root<Question> q, CriteriaQuery<?> query,
             CriteriaBuilder cb) {
         query.distinct(true);  // 중복을 제거
-        Join&lt;Question, SiteUser> u1 = q.join("author", JoinType.LEFT);
-        Join&lt;Question, Answer> a = q.join("answerList", JoinType.LEFT);
-        Join&lt;Answer, SiteUser> u2 = a.join("author", JoinType.LEFT);
+        Join<Question, SiteUser> u1 = q.join("author", JoinType.LEFT);
+        Join<Question, Answer> a = q.join("answerList", JoinType.LEFT);
+        Join<Answer, SiteUser> u2 = a.join("author", JoinType.LEFT);
         return cb.or(cb.like(q.get("subject"), "%" + kw + "%"), // 제목
           cb.like(q.get("content"), "%" + kw + "%"),      // 내용
           cb.like(u1.get("username"), "%" + kw + "%"),    // 질문 작성자
@@ -55,27 +54,27 @@ private Specification&lt;Question> search(String kw) {
           cb.like(u2.get("username"), "%" + kw + "%"));   // 답변 작성자
       }
     };
-}  </pre>
+}  </xmp>
   <h3>질문 서비스 수정</h3>
-  <pre>
-public Page&lt;Question> getList(int page, String kw) {
-    List&lt;Sort.Order> sorts = new ArrayList<>();
+  <xmp>
+public Page<Question> getList(int page, String kw) {
+    List<Sort.Order> sorts = new ArrayList<>();
     sorts.add(Sort.Order.desc("createDate"));
     Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
-    Specification&lt;Question> spec = search(kw);
+    Specification<Question> spec = search(kw);
     return this.questionRepository.findAll(spec, pageable);
-}  </pre>
+}  </xmp>
   <h2>질문 컨트롤러 수정하기</h2>
-  <pre>
+  <xmp>
   @GetMapping("/list")
   public String list(Model model,
           @RequestParam(value = "page", defaultValue = "0") int page,
           @RequestParam(value = "kw", defaultValue = "") String kw) {
-      Page&lt;Question> paging = this.questionService.getList(page, kw);
+      Page<Question> paging = this.questionService.getList(page, kw);
       model.addAttribute("paging", paging);
       model.addAttribute("kw", kw);
       return "question_list";
-  }  </pre>
+  }  </xmp>
   <p>검색어에 해당하는 kw 매개변수를 추가했고 기본값으로 빈 문자열을 설정했다.</p>
   <p>검색어가 입력되지 않을 경우 kw값이 null이 되는 것을 방지하기 위해 빈 문자열을 기본값으로 설정한다.</p>
   <p> 그리고 화면에서 입력한 검색어를 화면에 그대로 유지하기 위해 model.addAttribute("kw", kw)로 kw값을 저장했다. 이제 화면에서 검색어가 입력되면 kw값이 매개변수로 들어오고 해당 값으로 질문 목록이 검색되어 조회될 것이다.</p>
@@ -85,35 +84,35 @@ public Page&lt;Question> getList(int page, String kw) {
   <h2>검색창 만들기</h2>
   <h2>검색 폼 만들기</h2>
 <pre>
-&lt;form th:action="@{/question/list}" method="get" id="searchForm">
-    &lt;input type="hidden" id="kw" name="kw" th:value="${kw}">
-    &lt;input type="hidden" id="page" name="page" th:value="${paging.number}">
-&lt;/form> </pre>
+<form th:action="@{/question/list}" method="get" id="searchForm">
+    <input type="hidden" id="kw" name="kw" th:value="${kw}">
+    <input type="hidden" id="page" name="page" th:value="${paging.number}">
+</form> </pre>
     <p>GET 방식으로 요청해야 하므로 method 속성에 'get'을 설정했다. kw와 page는 이전에 요청했던 값을 기억하고 있어야 하므로 value에 값을 유지할 수 있도록 했다. 이전에 요청했던 kw와 page의 값은 컨트롤러로부터 다시 전달받는다. 그리고 action 속성에는 폼이 전송되는 URL이므로 질문 목록 URL인 /question/list를 지정했다.</p>
   <h2>페이징 수정하기</h2>
 <pre>
-&lt;div th:if="${!paging.isEmpty()}">
-  &lt;ul class="pagination justify-content-center">
-    &lt;li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
-      <b>&lt;a class="page-link" href="javascript:void(0)"
+<div th:if="${!paging.isEmpty()}">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+      <b><a class="page-link" href="javascript:void(0)"
             th:data-page="${paging.number-1}"></b>
-        &lt;span>이전&lt;/span>
-      &lt;/a>
-    &lt;/li>
-    &lt;li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+        <span>이전</span>
+      </a>
+    </li>
+    <li th:each="page: ${\#numbers.sequence(0, paging.totalPages-1)}"
         th:if="${page >= paging.number-5 and page <= paging.number+5}"
         th:classappend="${page == paging.number} ? 'active'" class="page-item">
-      <b>&lt;a th:text="${page}" class="page-link"
-            href="javascript:void(0)" th:data-page="${page}">&lt;/a></b>
-    &lt;/li>
-    &lt;li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-      <b>&lt;a class="page-link" href="javascript:void(0)"
+      <b><a th:text="${page}" class="page-link"
+            href="javascript:void(0)" th:data-page="${page}"></a></b>
+    </li>
+    <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+      <b><a class="page-link" href="javascript:void(0)"
             th:data-page="${paging.number+1}"></b>
-        &lt;span>다음&lt;/span>
-      &lt;/a>
-    &lt;/li>
-  &lt;/ul>
-&lt;/div>
+        <span>다음</span>
+      </a>
+    </li>
+  </ul>
+</div>
 </pre>
   <h2>검색 스크립트 추가하기</h2>
 <pre>
@@ -136,6 +135,4 @@ btn_search.addEventListener('click', function() {
 <section>
   <h2>@Query annotation 사용하기</h2>
 </section>
-</main>
-</body>
-</html>
+{% endblock %}

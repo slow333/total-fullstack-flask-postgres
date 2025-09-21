@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>JavaScript</title>
-  <script src="/js/backup/loadScript.js"></script>
-  <link rel="icon" href="/favicon.ico" />
-  <link href="/css/style.css" rel="stylesheet" >
-</head>
-<body>
-<main>
-  <h1>try catch</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} Jtry catch {% endblock %}
+
+{% block content %}
   <section>
     <h2>setTimeout과 같은 스케줄된 코드에서는 try..catch를 잡아낼수 없음</h2>
     <pre>setTimeout(function(){
@@ -81,8 +76,9 @@ alert( `연산 시간: ${diff}ms` );</pre>
   </section>
   <h1>커스텀 애러와 애러 확장</h1>
   <h2>나중에 필요할 때 읽어 보기.. 일단 스킵</h2>
-</main>
-<!--################################################-->
+
+{% endblock %}
+
 <script>
   let num = 21;
   let diff, result;
@@ -101,5 +97,3 @@ alert( `연산 시간: ${diff}ms` );</pre>
   console.log(result || "에러 발생");
   console.log( `연산 시간: ${diff}ms` );
 </script>
-</body>
-</html>

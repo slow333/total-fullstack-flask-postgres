@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>spring security</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} spring security {% endblock %}
+
+{% block content %}
   <p> SBB도 스프링 시큐리티를 사용하여 회원 가입과 로그인 기능을 만들 것이다. SBB에 회원 가입과 로그인 기능을 추가하기 전에 먼저 스프링 시큐리티를 간단하게 알아보고 설치와 설정도 진행</p>
   <p>스프링 시큐리티는 스프링 기반 웹 애플리케이션의 인증과 권한을 담당하는 스프링의 하위 프레임워크이다. 여기서 인증(authenticate)은 로그인과 같은 사용자의 신원을 확인하는 프로세스를, 권한(authorize)은 인증된 사용자가 어떤 일을 할 수 있는지(어떤 접근 권한이 있는지) 관리하는 것을 의미한다.</p>
 <section>
@@ -44,6 +43,4 @@ http.headers((headers) -> headers
   .addHeaderWriter(new XFrameOptionsHeaderWriter(
       XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))  </pre>
 </section>
-</main>
-</body>
-</html>
+{% endblock %}

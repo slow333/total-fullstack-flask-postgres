@@ -1,4 +1,9 @@
-<h1>LOOP 문</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Python {% endblock %}
+{% block header %} LOOP 문 {% endblock %}
+  
+{% block content %}
 <section>
 <h3>if 문</h3>
 <p>x or y # x가 False이면 y, x가 True이면 x<br />
@@ -86,3 +91,4 @@ else:
     # loop fell through without finding a factor
     print('No prime numbers found')</pre>
 </section>
+{% endblock %}

@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>Question list</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} Question list {% endblock %}
+
+{% block content %}
   <section>
     <h2>데이터를 템플릿에 전달하기</h2>
     <p>이제 질문 목록이 담긴 데이터를 조회하여 이를 템플릿을 통해 화면에 전달해 보려고 한다. 질문 목록과 관련된 데이터를 조회하려면 QuestionRepository를 사용해야 한다. QuestionRepository로 조회한 질문 목록 데이터는 Model 클래스를 사용하여 템플릿에 전달할 수 있다.</p>
@@ -44,22 +43,4 @@ th:each="question, loop : ${questionList}"</pre>
     <h4>loop.current: 현재 대입된 객체(여기서는 question과 동일)</h4>
     <h3>텍스트</h3>
     <pre>th:text="${question.subject}"</pre>
-    <pre>&lt;tr th:each="question : ${questionList}">
-<!--/*--      &lt;td>[[%{question.subject}]]&lt;/td>
-  &lt;td>[[%{question.createDate}]]&lt;/td>
-&lt;/tr> --*/-->
-</pre>
-    <h3>List 크기: ${#Lists.size(object)}</h3>
-  </section>
-  <section>
-    <h2>root : redirect</h2>
-    <h3>redirect는 /를 /question/list로 페이지를 리다이렉트함</h3>
-  <pre>@GetMapping("/")
-  public String root() {
-    return "redirect:/question/list";
-}
-  </pre>
-  </section>
-</main>
-</body>
-</html>
+{% endblock %}    

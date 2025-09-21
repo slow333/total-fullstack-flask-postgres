@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>Navigation Bar</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} Navigation Bar {% endblock %}
+
+{% block content %}
   <h2>여기부터는 내용이 좀 다름..</h2>
   <section>
     <h2>navbar 생성 및 페이지에 추가하기</h2>
@@ -41,6 +40,4 @@
       본문 내용 들어 가는 곳
 &lt;/div>   </pre>
   </section>
-</main>
-</body>
-</html>
+{% endblock %}

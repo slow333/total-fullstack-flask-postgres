@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-  <h1>JSON과 메서드</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} JSON과 메서드 {% endblock %}
+
+{% block content %}
   <section>
     <h2>JSON.stringify</h2>
     <pre>let student = {
@@ -64,9 +63,4 @@ let meetup = JSON.parse(str, function(key, value) {
   return value;
 });</pre>
   </section>
-</main>
-<script>
-
-</script>
-</body>
-</html>
+{% endblock %}

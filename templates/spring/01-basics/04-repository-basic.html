@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>리포지터리로 데이터베이스 관리</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} 리포지터리로 데이터베이스 관리 {% endblock %}
+
+{% block content %}
   <p>엔티티로 테이블을 구성하여 데이터를 관리할 준비를 마쳤다. 하지만 엔티티만으로는 데이블의 데이터를 CRUD 할수없다. 데이터를 관리하려면 데이터베이스와 연동하는 JPA 리포지터리가 반드시 필요</p>
 <section>
   <h2>리포지터리 생성</h2>
@@ -65,6 +64,4 @@ public interface CrudRepository&lt;T, ID> extends Repository&lt;T, ID> {
   void deleteAll();
 }</pre>
   </section>
-</main>
-</body>
-</html>
+{% endblock %}

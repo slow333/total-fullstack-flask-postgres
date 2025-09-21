@@ -1,4 +1,9 @@
-<h1>class and module</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Python {% endblock %}
+{% block header %} class and module {% endblock %}
+  
+{% block content %}
 <section>
 <h3>python class</h3>
 <h5>class
@@ -122,3 +127,4 @@ a = mod2.Math()
 print(a.solv(2))
 print(mod2.add(mod2.PI,4.4))</pre>
 </section>
+{% endblock %}

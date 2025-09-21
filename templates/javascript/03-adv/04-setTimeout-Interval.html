@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>JavaScript</title>
-  <script src="/js/backup/loadScript.js"></script>
-  <link rel="icon" href="/favicon.ico" />
-  <link href="/css/style.css" rel="stylesheet" >
-</head>
-<body>
-<main>
-  <h1>setTimeout, setInterval</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} setTimeout, setInterval {% endblock %}
+
+{% block content %}
   <section>
     <h2>setTimeout</h2>
     <pre>function sayHi(who, phrase) {
@@ -53,8 +48,9 @@ let timerId = setTimeout(function request() {
 alert("Hello");
  --> "Hello World"가 출력됨</pre>
   </section>
-</main>
-<!--################################################-->
+{% endblock %}
+
+
 <script>
 function printNumbers(from, to){
   let current = from;
@@ -78,7 +74,4 @@ function printNumbers2(from, to){
   },1000)
 }
 printNumbers2(0, 6);
-
 </script>
-</body>
-</html>

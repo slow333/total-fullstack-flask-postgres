@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>login and logout</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} login and logout {% endblock %}
+
+{% block content %}
   <h3>sec:authorize="isAuthenticated()", "isAnonymous()"는 js import에서 동작안함...</h3>
 <section>
   <h2>1. filterChain: login page 연결하기</h2>
@@ -135,6 +134,4 @@ public class SecurityConfig {
     .logoutSuccessUrl("/")
     .invalidateHttpSession(true))  </pre>
 </section>
-</main>
-</body>
-</html>
+{% endblock %}

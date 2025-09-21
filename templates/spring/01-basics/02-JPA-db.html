@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-<h1>JPS로 데이터베이스 사용하기</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Spring Boot {% endblock %}
+
+{% block header %} JPS로 데이터베이스 사용하기 {% endblock %}
+
+{% block content %}
   <p>ORM(Object Relational Mapping)이라는 도구를 사용하면 자바 문법으로도 데이터베이스를 다룰수 있음</p>
   <h3>application.properties, build.gradle: DB설정 -> JPA 설정</h3>
   <section>
@@ -109,6 +108,4 @@ spring.jpa.hibernate.ddl-auto=update</pre>
 spring.jpa.properties.hibernate.format_sql=true
 spring.jpa.properties.hibernate.show_sql=true</pre>
   </section>
-</main>
-</body>
-</html>
+{% endblock %}

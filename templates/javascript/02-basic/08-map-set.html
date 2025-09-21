@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-  <h1>map and set</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} map and set {% endblock %}
+
+{% block content %}
   <h3>객체 : 키가 있는 컬렉션을 저장</h3>
   <h3>배열 : 순서가 있는 컬렉션을 저장</h3>
   <section>
@@ -103,7 +102,8 @@ for(let value of Object.values(obj) { ... }</pre>
     <h2>객체 변환하기</h2>
     <h3>Object.entries(obj) => .map(([key, value]) => [key, value *2]) => wrap Object.fromEntries</h3>
   </section>
-</main>
+{% endblock %}
+
 <script>
   function unique(arr) {
     return Array.from(new Set(arr));
@@ -144,5 +144,3 @@ for(let value of Object.values(obj) { ... }</pre>
     return Object.keys(user).length;
   }
 </script>
-</body>
-</html>
