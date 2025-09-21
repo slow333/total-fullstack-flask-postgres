@@ -1,8 +1,18 @@
 export async function selectNavItems() {
-  document.addEventListener('DOMContentLoaded',  function (e) {
+  document.addEventListener('DOMContentLoaded',  async function (e) {
     e.preventDefault();
-    const currLocation = this.location.pathname.split('/')[1];
-    setSubMenus(currLocation)
+    const currLocation = this.location.pathname;
+    await setSubMenus(currLocation.split('/')[1]);
+
+    document.querySelectorAll(".sub-url").forEach(item => {
+      if (currLocation == item.getAttribute('href') && currLocation.split('/').length > 3){
+        item.style.backgroundColor = 'rgba(5, 79, 216, 1)';
+        const parentNode =item.parentElement?.parentElement?.parentElement?.firstElementChild;
+        parentNode.style.color = 'rgba(188, 211, 253, 1)';
+        parentNode.style.backgroundColor = 'rgba(0, 60, 172, 1)';
+        parentNode.style.border='1px solid rgba(0, 34, 95, 1)';
+      }
+  });
   });
 }
 
@@ -16,9 +26,9 @@ async function loadByFile(file_uri) {
 }
 async function setSubMenus(item){
   document.querySelectorAll(".navbar-btn").forEach(item => {
-    item.classList.remove('active');
+    item.classList.remove('curr-url');
   });
-  document.querySelector('#'+item).classList.add('active')
+  document.querySelector('#'+item).classList.add('curr-url');
   switch (item) {
     case 'python':
       await loadByFile('/static/nav-html/_python-nav.html');

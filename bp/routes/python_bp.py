@@ -6,6 +6,7 @@ bp = Blueprint('python_bp', __name__, url_prefix='/python')
 def python_home():
   return render('python/python_index.html')
 
+@bp.route('/core/')
 @bp.route('/core/datatype')
 def python_datatype():
   return render('python/core/01_datatype.html')
@@ -42,14 +43,11 @@ def python_closer_decorator():
 def python_regexp():
   return render('python/core/09_regexp.html')
 
-@bp.route('/flask/install')
-def flask_install():
-  return render('python/flask/00_python_flask_install.html')
+@bp.route('/flask/')
+@bp.route('/flask/db-setup')
+def flask_db_setup():
+  return render('python/flask/db_setup.html')
 
 @bp.route('/flask/core-crud')
 def flask_core_crud():
   return render('python/flask/core_crud.html')
-
-@bp.route('/flask/db-setup')
-def flask_db_setup():
-  return render('python/flask/db_setup.html')

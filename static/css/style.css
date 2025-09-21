@@ -211,12 +211,10 @@ pre, xmp {
   line-height: 1.4;
   white-space: pre-wrap; word-break: break-all; overflow: auto;
 }
-button.navbar-btn.active {
+.curr-url {
   border: 1px solid var(--navbar-color);
   background-color: var(--navbar-bg);
-  /* color: black; */
 }
-button.navbar-btn.active a {
-  /* background-color: red; */
+.curr-url a {
   color: rgb(121, 216, 253);
 }
