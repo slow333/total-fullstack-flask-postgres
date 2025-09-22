@@ -1,15 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-  <h1>callback</h1>
-  <p>setTimeout은 스케줄링에 사용되는 대표적인 함수. 모든 스크립트가 실행되고 난 후에 실행됨</p>
-  <section>
-    <h2>loadScript </h2>
-    <pre>function loadScript(src, callback) {
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} callback {% endblock %}
+
+{% block content %}
+<p>setTimeout은 스케줄링에 사용되는 대표적인 함수. 모든 스크립트가 실행되고 난 후에 실행됨</p>
+<section>
+  <h2>loadScript </h2>
+  <pre>function loadScript(src, callback) {
     let script = document.createElement('script');
     script.src = src;
     script.onload = () => callback(null, script); // null을 앞에 넣야함
@@ -34,9 +33,10 @@
       }
     }
 });</pre>
-  </section>
-</main>
-<!--################################################-->
+</section>
+
+{% endblock content %}
+
 <script>
   function loadScript(src, callback) {
     let script = document.createElement('script');
@@ -54,5 +54,3 @@
     }
   });
 </script>
-</body>
-</html>

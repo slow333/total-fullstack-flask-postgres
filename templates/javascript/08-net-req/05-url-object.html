@@ -1,10 +1,10 @@
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>URL objects</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} URL objects {% endblock %}
+
+{% block content %}
   <h3>내장 URL 클래스는 다양한 인터페이스를 제공</h3>
   <pre>new URL(url, [base])</pre>
 <section>
@@ -41,8 +41,4 @@ for(let [name, value] of url.searchParams) {
 }</pre>
     <h2>Encoding</h2>
   </section>
-</main>
-<script>
-</script>
-</body>
-</html>
+{% endblock %}

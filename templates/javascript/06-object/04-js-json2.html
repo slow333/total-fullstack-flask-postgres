@@ -1,23 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base/base.html' %}
 
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-  <style>
-    .heroHeader, #heroIntro { font-weight: bolder; text-align: center;}
-    .heroHeader { font-size: 2rem; }
-    #heroIntro { font-size: 1.3rem; }
-    .heroName { font-size: 1.2rem; font-weight: bold;}
-  </style>
-</head>
+{% block import %}
+<style>
+  .heroHeader, #heroIntro { font-weight: bolder; text-align: center;}
+  .heroHeader { font-size: 2rem; }
+  #heroIntro { font-size: 1.3rem; }
+  .heroName { font-size: 1.2rem; font-weight: bold;}
+</style>
+{% endblock %}
 
-<body>
-<main>
-  <h1>JS JSON2</h1>
-  <section>
-    <h3>JSON 가져오기</h3>
-    <ol>
-      <li>일단, 변수로 둘 JSON의 URL을 가져옴<br>
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} JS JSON2 {% endblock %}
+
+{% block content %}
+<section>
+  <h3>JSON 가져오기</h3>
+  <ol>
+    <li>일단, 변수로 둘 JSON의 URL을 가져옴<br>
 <pre>let requestURL =
   "https://mdn.github.io/learning-area/javascript/oojs
           /json/superheroes.json";</pre></li>
@@ -67,11 +67,10 @@
       </div>
     </div>
   </section>
-</main>
+{% endblock %}
+
 <script>
   let myJson = {name: "black pink", age:6}
   let text = JSON.stringify(myJson);
   document.querySelector("#exContainer").textContent = text;
 </script>
-</body>
-</html>

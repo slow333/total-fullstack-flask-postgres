@@ -98,6 +98,11 @@ mydatabase=> \conninfo
 You are connected to database "mydatabase" as user
 </PRE>
 <h2>basic command</h2>
+
+<h4>DROP DATABSE</h4>
+<pre>=# DROP DATABASE database_name;</pre>
+<h4>db connect</h4>
+<pre>=# \c database_name</pre>
 <pre>
 # check version
 psql --version
@@ -113,6 +118,8 @@ CREATE USER user_name WITH PASSWORD 'password';
 
 # grant all privileges on database to user
 GRANT ALL PRIVILEGES ON DATABASE db_name TO user_name;
+
+# psql -U mydbuser -h 127.0.0.1 -d postgres
 
 # list all databases
 \l

@@ -1,10 +1,10 @@
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>Fetch:Abort</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} Fetch:Abort {% endblock %}
+
+{% block content %}
   <pre>let controller = new AbortController();</pre>
 <section>
   <h2>Using with fetch; 1초 후에 중지</h2>
@@ -49,8 +49,4 @@ let results = await Promise.all([...fetchJobs, ourJob]);
 // if controller.abort() is called from elsewhere,
 // it aborts all fetches and ourJob</pre>
 </section>
-</main>
-<script>
-</script>
-</body>
-</html>
+{% endblock %}

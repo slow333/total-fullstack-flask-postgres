@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>JavaScript</title>
-  <script src="/js/menu/loadNav.js"></script>
-<!--  <script src="/js/menu/loadScript.js"></script>-->
-  <link rel="icon" href="/favicon.ico" />
-  <link href="/css/style.css" rel="stylesheet" >
-</head>
-<body>
-<main>
-  <h1>async, await</h1>
-  <pre>async function f() {
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} async, await {% endblock %}
+
+{% block content %}
+<pre>async function f() {
   let promise = new Promise((resolve, reject) => {
     setTimeout(() => resolve("완료!"), 1000)
   });
@@ -93,10 +87,9 @@ function demoGithubUser() {
 
 demoGithubUser();</pre>
   </section>
-</main>
-<!--################################################-->
-<script>
 
+{% endblock content %}
+<script>
 class HttpError extends Error {
   constructor(response) {
     super(`${response.status} for ${response.url}`);
@@ -136,5 +129,3 @@ function demoGithubUser() {
 
 demoGithubUser();
 </script>
-</body>
-</html>

@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>JavaScript</title>
-  <script src="/js/backup/loadScript.js"></script>
-  <link rel="icon" href="/favicon.ico" />
-  <link href="/css/style.css" rel="stylesheet" >
-</head>
-<body>
-<main>
-  <h1>promise API</h1>
-  <section>
-    <h2>Promise.all</h2>
-    <h3>하나라도 애러가 나면 전체가 애러남</h3>
-    <pre>let promise = Promise.all([ ...promises... ])</pre>
-    <pre>let urls = [ url1, url2, url3 ];
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} promise API {% endblock %}
+
+{% block content %}
+<section>
+  <h2>Promise.all</h2>
+  <h3>하나라도 애러가 나면 전체가 애러남</h3>
+  <pre>let promise = Promise.all([ ...promises... ])</pre>
+  <pre>let urls = [ url1, url2, url3 ];
   let requests = urls.map(url => fetch(url));
   Promise.all(requests)
     .then(responses => responses.forEach(
@@ -57,22 +52,22 @@ Promise.allSettled(names.map(name => fetch(`https://api.github.com/users/${name}
     });
   });</pre>
   </section>
-  <section>
-    <h2>Promise.race</h2>
-    <h3>가장먼저 처리되는 결과를 반환</h3>
-    <pre>let promise = Promise.race(iterable);</pre>
-    <pre>Promise.race([
+<section>
+  <h2>Promise.race</h2>
+  <h3>가장먼저 처리되는 결과를 반환</h3>
+  <pre>let promise = Promise.race(iterable);</pre>
+  <pre>Promise.race([
   new Promise((resolve, reject) => setTimeout(() => resolve(1), 1000)),
   new Promise((resolve, reject) => setTimeout(() => reject(new Error("에러 발생!")), 2000)),
   new Promise((resolve, reject) => setTimeout(() => resolve(3), 3000))
 ]).then(alert); // 1</pre>
-  </section>
-  <section><h2>Promisify; callback 함수를 promise로 만듦</h2></section>
-  <section id="promises">
+</section>
+<section><h2>Promisify; callback 함수를 promise로 만듦</h2></section>
+<section id="promises">
 
-  </section>
-</main>
-<!--################################################-->
+</section>
+{% endblock content %}
+
 <script>
   let names = [ 'iliakan', 'Violet-Bora-Lee', 'no-such-url' ];
   Promise.allSettled(names.map(name => fetch(`https://api.github.com/users/${name}`)))
@@ -87,5 +82,3 @@ Promise.allSettled(names.map(name => fetch(`https://api.github.com/users/${name}
       });
     });
 </script>
-</body>
-</html>

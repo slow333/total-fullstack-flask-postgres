@@ -134,7 +134,7 @@ def js_yield_module_etc_bigint():
 
 # ============= javascript Generator/module... ====================
 @bp.route('/06-object/')
-@bp.route('/06-object/01-generator')
+@bp.route('/06-object/01-js-object-intro')
 def js_object_index():
   return render('javascript/06-object/01-js-object-intro.html')
 

@@ -1,26 +1,22 @@
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>XMLHttpRequest</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} XMLHttpRequest {% endblock %}
+
+{% block content %}
 <section>
   <h2>URL 생성</h2>
   <pre>
 let xhr = new XMLHttpRequest();
-
 xhr.open('GET', '/my/url');
-
 xhr.send();
-
 xhr.onload = function() {
   if (xhr.status != 200) { // HTTP error?
     // handle error
     alert( 'Error: ' + xhr.status);
     return;
   }
-
   // get the response from xhr.response
 };
 
@@ -41,8 +37,4 @@ xhr.onerror = function() {
   <h4>loadend – triggers after load, error, timeout or abort.</h4>
   <h4>error, abort, timeout, load 중에서 한개의 이벤트만 발생함</h4>
   </section>
-</main>
-<script>
-</script>
-</body>
-</html>
+{% endblock %}

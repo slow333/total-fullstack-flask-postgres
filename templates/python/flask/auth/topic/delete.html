@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}MY Topic app{% endblock %}</h1>
+{% if g.user %}
+    <a class="action" href="/todo/create">New</a>
+{% endif %}
+{% endblock %}
+  
+{% block content %}
+  {% for topic in topics %}
+
+  {% endfor %}
+{% endblock %}

@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-  <h1>promise-based API</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} promise-based API {% endblock %}
+
+{% block content %}
   <h2>alarm() API 구현하기</h2>
   <p>마지막 글에서는 프로미스를 반환하는 API를 사용하는 방법에 대해 알아봤습니다. 이 글에서는 프로미스를 반환하는 API를 구현하는 방법에 대해 살펴보겠습니다. 이것은 프로미스 기반 API를 사용하는 것보다 훨씬 덜 일반적인 작업이지만 그래도 알 가치가 있습니다.</p>
   <section>
@@ -88,7 +87,4 @@
       <div id="output"></div>
     </div>
   </section>
-</main>
-</body>
-
-</html>
+{% endblock %}

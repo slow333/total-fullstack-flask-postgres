@@ -1,10 +1,10 @@
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>Cors</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} Cors {% endblock %}
+
+{% block content %}
   <h3>종류 : 안전한 요청(GET, POST), 그외 요청</h3>
 <section>
   <h2>CORS와 안전한 요청</h2>
@@ -57,8 +57,4 @@ Origin: https://javascript.info</pre>
   <h4>4단계: 실제응답</h4>
   <pre>Access-Control-Allow-Origin: https://javascript.info</pre>
 </section>
-</main>
-<script>
-</script>
-</body>
-</html>
+{% endblock %}

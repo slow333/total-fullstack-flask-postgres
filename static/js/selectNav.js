@@ -3,14 +3,14 @@ export async function selectNavItems() {
     e.preventDefault();
     const currLocation = this.location.pathname;
     await setSubMenus(currLocation.split('/')[1]);
-
+    
     document.querySelectorAll(".sub-url").forEach(item => {
-      if (currLocation == item.getAttribute('href') && currLocation.split('/').length > 3){
-        item.style.backgroundColor = 'rgba(5, 79, 216, 1)';
-        const parentNode =item.parentElement?.parentElement?.parentElement?.firstElementChild;
-        parentNode.style.color = 'rgba(188, 211, 253, 1)';
-        parentNode.style.backgroundColor = 'rgba(0, 60, 172, 1)';
-        parentNode.style.border='1px solid rgba(0, 34, 95, 1)';
+      if (currLocation == item.getAttribute('href') ){
+        item.classList.add('curr-url');
+        if(currLocation.split('/')[3]?.length > 0){
+          const parentNode =item.parentElement?.parentElement?.parentElement?.firstElementChild;
+          parentNode.classList.add('curr-url');
+        }
       }
   });
   });

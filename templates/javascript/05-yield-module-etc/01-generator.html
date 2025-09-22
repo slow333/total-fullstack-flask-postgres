@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>JavaScript</title>
-  <script src="/js/menu/loadNav.js"></script>
-  <link rel="icon" href="/favicon.ico" />
-  <link href="/css/style.css" rel="stylesheet" >
-</head>
-<body>
-<main>
-  <h1>제너레이터</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} 제너레이터, yield {% endblock %}
+
+{% block content %}
   <p>일반 함수는 하나의 값(혹은 0개의 값)만을 반환합니다.</p>
   <p>하지만 제너레이터(generator)를 사용하면 여러 개의 값을 필요에 따라 하나씩 반환(yield)할 수 있습니다.
     제너레이터와 이터러블 객체를 함께 사용하면 손쉽게 데이터 스트림을 만들 수 있습니다.</p>
@@ -46,10 +41,4 @@ alert(generator()); // 16807
 alert(generator()); // 282475249
 alert(generator()); // 1622650073</pre>
   </section>
-</main>
-<!--################################################-->
-<script>
-
-</script>
-</body>
-</html>
+{% endblock %}

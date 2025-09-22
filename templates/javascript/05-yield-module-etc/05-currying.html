@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>JavaScript</title>
-  <script src="/js/menu/loadNav.js"></script>
-  <link rel="icon" href="/favicon.ico" />
-  <link href="/css/style.css" rel="stylesheet" >
-</head>
-<body>
-<main>
-  <h1>currying</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} currying {% endblock %}
+
+{% block content %}
+<section>
   <p>커링 (Currying) 은 함수와 함께 사용할 수 있는 고급기술입니다.
     오직 자바스크립트에만 존재하는 것은 아니고 다른 언어에도 존재하죠.</p>
   <p>커링은 f(a, b, c)처럼 단일 호출로 처리하는 함수를 f(a)(b)(c)와 같이 각각의 인수가
@@ -49,8 +45,9 @@ logNow("INFO", "message"); // [HH:mm] INFO message
 
 let debugNow = logNow("DEBUG");
 debugNow("message"); // [HH:mm] DEBUG 메세지</pre>
-</main>
-<!--################################################-->
+</section>
+{% endblock %}
+
 <script>
   function sum(a, b) {
     return a + b;
@@ -59,5 +56,3 @@ debugNow("message"); // [HH:mm] DEBUG 메세지</pre>
   alert( carriedSum(1, 2) ); // 3, 보통 때 처럼 호출가능
   alert( carriedSum(1)(2) ); // 3, partially 호출되었음
 </script>
-</body>
-</html>

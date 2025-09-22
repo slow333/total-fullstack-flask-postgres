@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>JavaScript</title>
-  <script src="/js/menu/loadNav.js"></script>
-  <link rel="icon" href="/favicon.ico" />
-  <link href="/css/style.css" rel="stylesheet" >
-</head>
-<body>
-<main>
-  <h1>Proxy</h1>
-  <p>Proxy는 특정 객체를 감싸 프로퍼티 읽기, 쓰기와 같은 객체에 가해지는 작업을 중간에서 가로채는 객체로, 가로채진 작업은 Proxy 자체에서 처리되기도 하고, 원래 객체가 처리하도록 그대로 전달되기도 합니다.</p>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} Proxy {% endblock %}
+
+{% block content %}
+<section>
+<p>Proxy는 특정 객체를 감싸 프로퍼티 읽기, 쓰기와 같은 객체에 가해지는 작업을 중간에서 가로채는 객체로, 가로채진 작업은 Proxy 자체에서 처리되기도 하고, 원래 객체가 처리하도록 그대로 전달되기도 합니다.</p>
   <p>프락시는 다양한 라이브러리와 몇몇 브라우저 프레임워크에서 사용되고 있습니다.</p>
   <pre>let proxy = new Proxy(target, handler)</pre>
   <h2>get 트랩으로 프로퍼티 기본값 설정</h2>
@@ -68,9 +64,5 @@ try {
 
 // "ownKeys" 트랩이 순회 대상에서 _password를 제외시킵니다.
 for(let key in user) alert(key); // name</pre>
-</main>
-<!--################################################-->
-<script>
-</script>
-</body>
-</html>
+</section>
+{% endblock %}

@@ -1,10 +1,10 @@
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>fetch</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} fetch {% endblock %}
+
+{% block content %}
   <p>자바스크립트를 사용하면 필요할 때 서버에 네트워크 요청을 보내고 새로운 정보를 받아오는 일을 할 수 있습니다.</p>
   <p>네트워크 요청은 주문 전송, 사용자 정보 읽기,  서버에서 최신 변경분 가져오기, 등등 때 이루어짐</p>
   <h4>그런데 이 모든 것들은 페이지 새로 고침 없이도 가능합니다</h4>
@@ -116,8 +116,4 @@ function submit() {
   }, 'image/png');
 } </pre>
   </section>
-</main>
-<script>
-</script>
-</body>
-</html>
+{% endblock %}

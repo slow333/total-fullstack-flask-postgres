@@ -1,10 +1,10 @@
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>FormData 객체</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JavaScript {% endblock %}
+
+{% block header %} FormData 객체 {% endblock %}
+
+{% block content %}
   <p>FormData는 폼을 쉽게 보내도록 도와주는 객체. FormData 객체는 HTML 폼 데이터를 나타냅니다.</p>
   <pre>let formData = new FormData([form]);</pre>
   <h4>HTML에 form 요소가 있는 경우, 위와 같은 코드를 작성하면 해당 폼 요소의 필드 전체가 자동 반영됩니다.</h4>
@@ -81,8 +81,4 @@ async function submit() {
   alert(result.message);
 } </pre>
 </section>
-</main>
-<script>
-</script>
-</body>
-</html>
+{% endblock %}

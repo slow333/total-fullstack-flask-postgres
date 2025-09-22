@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base/base.html' %}
 
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
+{% block title %} JavaScript {% endblock %}
 
-<body>
-<main>
-  <h1 class="h1">JS Inheritance</h1>
-  <section>
+{% block header %} JS Inheritance {% endblock %}
+
+{% block content %}
+<section>
   <h2>Class 상속</h2>
     <h3>Prototype 상속</h3>
     <p>지금까지 몇 가지 상속을 살펴보았습니다 — 프로토타입 체인이 어떻게 동작하는지,
@@ -49,7 +46,4 @@ function BlueGlassBrick() {
     <p>call() 함수에 this만 넘긴 것을 보세요.
       — Brick() 생성자에서 매개변수를 통해 초기화 하는 속성들이 없으므로 call()에도 넘길 필요가 없습니다.</p>
   </section>
-</main>
-</body>
-
-</html>
+{% endblock %}
