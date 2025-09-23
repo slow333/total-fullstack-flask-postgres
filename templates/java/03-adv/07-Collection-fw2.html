@@ -1,12 +1,11 @@
+{% extends 'base/base.html' %}
 
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>Collection Framework 2</h1>
-  <section>
+{% block title %} Java {% endblock %}
+
+{% block header %} Collection Framework 2 {% endblock %}
+
+{% block content %}
+<section>
     <h2>Iterator</h2>
     <h4>boolean hasNext() : 있다면 true, 없다면 false 반환</h4>
     <h4>Object next() : 다음 요소 읽어오기(hasNext()로 확인 후 사용하는 것이 안전)</h4>
@@ -146,6 +145,4 @@ while(keyIterator.hasNext()){
     <h4>변경불가 컬렉션 : unmodifiableCollection,List,Set,Map,...</h4>
     <h4>싱글톤 컬렉션 : singletonList, Map and singleton(Set은 Set없음)</h4>
   </section>
-</main>
-</body>
-</html>
+{% endblock %}

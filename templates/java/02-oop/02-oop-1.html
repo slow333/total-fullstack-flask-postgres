@@ -1,11 +1,11 @@
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>OOP 1</h1>
-  <section>
+{% extends 'base/base.html' %}
+
+{% block title %} Java {% endblock %}
+
+{% block header %} OOP 1 {% endblock %}
+
+{% block content %}
+<section>
     <h2>멤버변수 초기화</h2>
 <pre>
 class Product {
@@ -95,6 +95,4 @@ class UnitEx {
   }
 }</pre>
 </section>
-</main>
-</body>
-</html>
+{% endblock %}

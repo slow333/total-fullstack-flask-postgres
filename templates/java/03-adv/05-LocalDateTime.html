@@ -1,13 +1,12 @@
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>java.time package</h1>
-  <h2>java.time, java.time.chrono, java.time.temporal, java.time.zone</h2>
+{% extends 'base/base.html' %}
+
+{% block title %} Java {% endblock %}
+
+{% block header %} java.time package {% endblock %}
+
+{% block content %}
+  <h3>java.time, java.time.chrono, java.time.temporal, java.time.zone</h3>
 <section>
-  <h2>LocalDateTime</h2>
   <pre>LocalDate.of(2022, 12,3); LocalTime(22, 10,20);</pre>
   <pre>LocalDate.ofYearDay(2000, 333); LocalTime.ofSecondOfDay(86400);</pre>
   <pre>LocalDate.parse("2022-12-3"); LocalTime.parse("22:30:00");</pre>
@@ -15,7 +14,7 @@
   <pre>LocalTime time = localDateTime.toLocalTime();</pre>
 </section>
 <section>
-  <h2>필드값 가져오기</h2>
+  <h3>필드값 가져오기</h3>
   <h4>LocalDate</h4>
   <h5>int getYear(); int getMonthValue(); Month getMonth(); int getDayOfYear();</h5>
   <pre>int minute = now.getMinute() OR now.get(ChronoField.MINUTE_OF_HOUR);</pre>
@@ -27,7 +26,7 @@
   <h5>YEAR, MONTH_OF_YEAR, HOUR_OF_DAY, MILLI_OF-DAY, MINUTE_OF_DAY, ... 많음 </h5>
 </section>
   <section>
-    <h2>with(), plus(), minus()</h2>
+    <h3>with(), plus(), minus()</h3>
     <pre>LocalDate with(TemporalField field, long newValue);</pre>
     <pre>LocalTime plus(TemporalAmount amountToAdd);</pre>
     <pre>LocalTime plus(long amountToAdd, TemporalUnit unit);</pre>
@@ -37,13 +36,13 @@
     <pre>LocalDate tomorrow = today.plusDays(1);</pre>
   </section>
   <section>
-    <h2>date1.isAfter(date); isBefore, isEqual</h2>
-    <h2>Instant : 에포크 타임부터 경과된 시간을 표현</h2>
+    <h3>date1.isAfter(date); isBefore, isEqual</h3>
+    <h3>Instant : 에포크 타임부터 경과된 시간을 표현</h3>
     <h3>Instant now2 = now.getEpochSecond(); now.getNano();</h3>
-    <h2>int result = date1.compareTo(date2)</h2>
+    <h3>int result = date1.compareTo(date2)</h3>
   </section>
   <section>
-    <h2>TemporalAdjusters</h2>
+    <h3>TemporalAdjusters</h3>
     <pre>LocalDate nextMonday = today.with(TemporalAdjusters.next(DayOfWeek.MONDAY));</pre>
     <h3>firstDayOfNexYear(); firstDAyOfNextMonth(); firstDayOfYear(); firstDayOfMonth();</h3>
     <h3>firstInMonth(DayOfWeek dayOfWeek); lastInMonth(DayOfWeek dayOfWeek);</h3>
@@ -51,21 +50,21 @@
     <h3>next(DayOfWeek dayOfWeek); nextOrSame(DayOfWeek dayOfWeek);</h3>
   </section>
   <section>
-    <h2>ZonedDateTime</h2>
+    <h3>ZonedDateTime</h3>
     <pre>ZoneId zid = ZoneId.of("Asia/Seoul");</pre>
     <pre>ZoneDateTime zdt = dateTime.atZone(zid);</pre>
-    <h2>ZoneOffset, OffsetDateTime</h2>
+    <h3>ZoneOffset, OffsetDateTime</h3>
     <pre>ZoneOffset krOffset = ZonedDateTime.now().getOffset();
     int krOffsetInSec = krOffset.get(ChronoField.OFFSET_SECONDS);</pre>
   </section>
   <section>
-    <h2>Period, Duration</h2>
+    <h3>Period, Duration</h3>
     <pre>Duration du = Duration.between(t1, t2);</pre>
     <pre>Period pe = today.until(myBirthDay);</pre>
     <pre>long dday = today.until(myBirthDay, ChronoUnit.DAYS);</pre>
   </section>
   <section>
-    <h2>formatting</h2>
+    <h3>formatting</h3>
     <pre>LocalDate date = LocalDate.of(2024,12,3);
     String YYYYmmdd = date.format(DateTimeFormatter.ISO_LOCAL_DATE);</pre>
     <pre>LocalDate date = LocalDate.parse("2024.12.3", DateTimeFormatter.ISO_LOCAL_DATE);</pre>
@@ -78,11 +77,9 @@
       H;시간, h;시간, m;분, s;초, S;밀리초, n;나노초, z; zone name, Z;zone-offset</pre>
   </section>
   <section>
-    <h2>locale에 종속된 형식화</h2>
+    <h3>locale에 종속된 형식화</h3>
     <pre>DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);</pre>
     <h3>FULL, LONG, MEDIUM, SHORT</h3>
     <pre>String shortFormat = formatter.format(LocalDate.now());</pre>
   </section>
-</main>
-</body>
-</html>
+{% endblock %}

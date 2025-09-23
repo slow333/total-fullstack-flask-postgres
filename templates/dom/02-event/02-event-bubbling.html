@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <link rel="stylesheet" href="/css/others/fieldAndBall.css">
-  <link rel="stylesheet" href="/css/others/carousel.css">
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-  <h1>버블링</h1>
-  <img src="/images/event-bubbling.png" alt="event bubbling" width="300" style="float:right;">
+{% extends 'base/base.html' %}
+
+{% block title %} JS DOM {% endblock %}
+
+{% block header %} 버블링 {% endblock %}
+
+{% block content %}
+  <img src="/static/image/exercise/event-bubbling.png" alt="event bubbling" width="300" style="float:right;">
   <h3>한 요소에 이벤트가 발생하면, 이 요소에 할당된 핸들러가 동작하고, 이어서 부모 요소의 핸들러가 동작합니다.
     가장 최상단의 조상 요소를 만날 때까지 이 과정이 반복되면서 요소 각각에 할당된 핸들러가 동작합니다.</h3>
   <h1>이벤트 위임;event delegation</h1>
@@ -226,7 +223,9 @@ new Menu(menutest)</pre>
     largeImg.alt = target.title;
   }</pre>
   </section>
-</main>
+{% endblock %}
+
+
 <script>
   grid.onclick = function(event) {
     if (event.target.tagName !== 'TH') return;
@@ -318,5 +317,3 @@ new Menu(menutest)</pre>
     }
   }
 </script>
-</body>
-</html>

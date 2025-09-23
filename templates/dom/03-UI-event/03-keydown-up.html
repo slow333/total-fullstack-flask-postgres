@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-  <h1>Keyboard; keydown, keyup</h1>
-  <section>
-    <h2>event.keydown/up, event.key, event.code</h2>
+{% extends 'base/base.html' %}
+
+{% block title %} JS DOM {% endblock %}
+
+{% block header %} Keyboard; keydown, keyup {% endblock %}
+
+{% block content %}
+<section>
+  <h2>event.keydown/up, event.key, event.code</h2>
 <pre>
   key            event.key               event.code
   -----------------------------------------------------
@@ -38,8 +37,10 @@
           key === '('|| key === '-'  ||
           key == 'ArrowLeft' || key == 'ArrowRight' || key == 'Delete' || key == 'Backspace')
 }</pre>
-  </section>
-</main>
+</section>
+{% endblock %}
+
+
 <script>
   function checkPhoneKey(event) {
     let key = event.key;
@@ -59,5 +60,3 @@
     console.log(`key: ${event.key}, ${event.code}`)
   });
 </script>
-</body>
-</html>

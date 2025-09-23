@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+
+{% block title %} JS DOM {% endblock %}
+
+{% block header %} 브라우저 환경과 다양한 명세서 {% endblock %}
+
+{% block content %}
+<section>
+  <h3>웹 브라우저 환경일 때 지원하는 것</h3>
+  <a href="https://html.spec.whatwg.org">https://html.spec.whatwg.org</a><br>
+  <a href="https://spec.whatwg.org">https://spec.whatwg.org</a>
+  <p>검색:https://google.com?q=whatwg+localstorage, https://google.com?q=mdn+localstorage  </p>
+<pre>
+window(브라우저 창을 대변함)
+- DOM: document, ...
+- BOM: navigator, screen, location, frames, history, XMLHttpRequest
+- JavaScript: Object, Array, Function, ...  </pre>
+</section>
+<section>
+  <h3>문서 객체 모델: Document Object Model</h3>
+  <h4>WHATWG의 DOM Living standard에서 관련 프로퍼티를 찾을 수 있음</h4>
+</section>
+<section>
+  <h3>Browser Object Model, BOM</h3>
+  <h4>브라우저와 운영체계에 대한 정보를 제공하는 navigator, 현재 URL을 알려주는 location이 있음</h4>
+  <h4>alert, confirm, prompt는 BOM 임</h4>
+</section>
+{% endblock %}

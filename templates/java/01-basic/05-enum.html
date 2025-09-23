@@ -1,12 +1,11 @@
-<!--suppress ALL -->
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>enum</h1>
-  <h3>열거형으로 선언된 순서에 따라 0 부터 인덱스 값을 가진다. 순차적으로 증가된다.</h3>
+{% extends 'base/base.html' %}
+
+{% block title %} Java {% endblock %}
+
+{% block header %} enum {% endblock %}
+
+{% block content %}
+<h3>열거형으로 선언된 순서에 따라 0 부터 인덱스 값을 가진다. 순차적으로 증가된다.</h3>
 <h3>enum 열거형으로 지정된 상수들은 모두 대문자로 선언</h3>
 <section>
   <h2>클래스 선언</h2>
@@ -239,6 +238,4 @@ public enum Operator {
 }
 </pre>
   </section>
-</main>
-</body>
-</html>
+{% endblock %}

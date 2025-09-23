@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-  <h1>form property and method</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} JS DOM {% endblock %}
+
+{% block header %} form property and method {% endblock %}
+
+{% block content %}
   <h3>input과 같이 폼 조작에 사용되는 요소에는 특별한 프로퍼티와 이벤트가 많음</h3>
   <section>
     <h2>폼과 요소 탐색하기</h2>
@@ -59,6 +58,4 @@ let option = `&lt;option value='pear'>Pear&lt;/option>`;
 select.insertAdjacentHTML("beforeend", option);
 select.options[select.options.length -1].selected = true;</pre>
   </section>
-</main>
-</body>
-</html>
+{% endblock %}

@@ -6,6 +6,7 @@ bp = Blueprint('python_bp', __name__, url_prefix='/python')
 def python_home():
   return render('python/python_index.html')
 
+# python basic ================================
 @bp.route('/core/')
 @bp.route('/core/datatype')
 def python_datatype():
@@ -43,6 +44,34 @@ def python_closer_decorator():
 def python_regexp():
   return render('python/core/09_regexp.html')
 
+# python adv ================================
+@bp.route('/adv/')
+@bp.route('/adv/01_class')
+def python_adv_class():
+  return render('python/adv/01_class.html')
+
+@bp.route('/adv/02_moudle')
+def python_adv_moudle():
+  return render('python/adv/02_moudle.html')
+
+@bp.route('/adv/03_try_except')
+def python_adv_try_except():
+  return render('python/adv/03_try_except.html')
+
+@bp.route('/adv/04_py_library')
+def python_adv_py_library():
+  return render('python/adv/04_py_library.html')
+
+@bp.route('/adv/05_closer_decorator')
+def python_adv_closer_decorator():
+  return render('python/adv/05_closer_decorator.html')
+
+@bp.route('/adv/06_regexp')
+def python_adv_regexp():
+  return render('python/adv/06_regexp.html')
+
+
+# python flask ================================
 @bp.route('/flask/')
 @bp.route('/flask/db-setup')
 def flask_db_setup():

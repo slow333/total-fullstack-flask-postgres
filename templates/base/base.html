@@ -10,15 +10,22 @@
     {% include 'base/_navbar.html' %}
     <div class="sub-menu"></div>
   </div>
+
   <header>
     {% block header %}{% endblock %}
   </header>
+
   <main>
     {% block content %}{% endblock %}
   </main>
+  
+  <button id="scrollTopBtn" title="맨 위로 이동">Top</button>
+
   {% block script %}{% endblock %}
+
   <script type="module">
     import { selectNavItems } from "/static/js/selectNav.js";
+    import "/static/js/scrollTop.js"
     selectNavItems()
   </script>
 </body>

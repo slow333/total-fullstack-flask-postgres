@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends 'base/base.html' %}
 
-  <style>
+{% block import %}
+<style>
     .field {
       width: 600px; height: 300px;border: 1px solid red;
     }
@@ -19,11 +18,13 @@
       text-align: center; font: 30px Arial ; color: white; text-shadow: 2px 2px 2px black;
     }
   </style>
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-  <h1>드래그 앤 드롭과 마우스 이벤트</h1>
+{% endblock %}
+
+{% block title %} JS DOM {% endblock %}
+
+{% block header %} 드래그 앤 드롭과 마우스 이벤트 {% endblock %}
+
+{% block content %}
   <h3>어려움... 나중에 할 때...</h3>
   <h3>Pointer events: 마우스, 펜, 스타일러스 같이 터치스크린에서 input을 다루는 방법, 이것도 나중에</h3>
   <section>
@@ -102,7 +103,9 @@ ball.ondragstart = function() {
 }
 </pre>
   </section>
-</main>
+{% endblock %}
+
+
 <script>
   field.style.position = 'relative';
   let currentDroppable = null;
@@ -171,5 +174,3 @@ ball.ondragstart = function() {
     return false;
   }
 </script>
-</body>
-</html>

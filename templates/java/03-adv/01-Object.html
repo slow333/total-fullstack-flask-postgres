@@ -1,19 +1,19 @@
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>Object class</h1>
-  <h2>모든 클래스의 조상</h2>
+{% extends 'base/base.html' %}
+
+{% block title %} Java {% endblock %}
+
+{% block header %} Object {% endblock %}
+
+{% block content %}
+  <h5>모든 클래스의 조상</h5>
 <section>
-  <h2>Object class method</h2>
-  <h3>쓰레드와 관련된 메서드 : notify(), wait() 등</h3>
-  <h3>override 필요 : equals(), hashCode(), toString()</h3>
-  <h3>public Class getClass(); </h3>
+  <h3>Object class method</h3>
+  <h5>쓰레드와 관련된 메서드 : notify(), wait() 등</h5>
+  <h5>override 필요 : equals(), hashCode(), toString()</h5>
+  <h5>public Class getClass(); </h5>
 </section>
 <section>
-  <h2>equals(Object obj)</h2>
+  <h3>equals(Object obj)</h3>
   <pre>
 class Person {
   int id;
@@ -29,6 +29,4 @@ class Person {
   }
 } </pre>
 </section>
-</main>
-</body>
-</html>
+{% endblock %}

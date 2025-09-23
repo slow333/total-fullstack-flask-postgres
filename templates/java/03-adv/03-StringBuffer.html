@@ -1,10 +1,10 @@
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>StringBuffer class</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Java {% endblock %}
+
+{% block header %} StringBuffer {% endblock %}
+
+{% block content %}
 <pre>public final class StringBuffer implements java.io.Serializable{
   private char[] value;
   ...  
@@ -39,6 +39,4 @@ sb.append("123"); </pre>
   <h4>void setLength(int newLength);</h4>
   <h4>String substring(int start [,int end])</h4>
 </section>
-</main>
-</body>
-</html>
+{% endblock %}

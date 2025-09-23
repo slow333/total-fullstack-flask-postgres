@@ -1,10 +1,10 @@
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>String class</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Java {% endblock %}
+
+{% block header %} String {% endblock %}
+
+{% block content %}
 <section>
   <h3>Constructor</h3>
   <h4>String(char[] c); String(String str);</h4>
@@ -52,6 +52,4 @@
   }
 }</pre>
 </section>
-</main>
-</body>
-</html>
+{% endblock %}

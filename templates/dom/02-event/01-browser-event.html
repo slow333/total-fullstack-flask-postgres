@@ -1,24 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <link rel="stylesheet" href="/css/others/fieldAndBall.css">
-  <link rel="stylesheet" href="/css/others/carousel.css">
-  <script src="/js/menu/loadNav.js"></script>
-</head>
-<body>
-<main>
-  <h1>브라우저 이벤트</h1>
-  <h3>브라우저 이벤트 종류</h3>
-  <h4>click;</h4>
-  <h4>contextmenu; 마우스 오른쪽 버튼을 눌렀을 때</h4>
-  <h4>mouseover/mouseout; mousedown/mouseup; mousemove;</h4>
-  <h4>mouseover/out, mouseenter/leave 는 동작이 서로 다름, bubbling 차이라는데 정확히 모름</h4>
-  <h3>폼 요소: submit, focus</h3>
-  <h3>key ; keydown, keyup</h3>
-  <h3>문서 이벤트; DOMContentLoaded; </h3>
-  <h3>CSS 이벤트; transitionend</h3>
-  <h2>carousel 예제; 좌우로 내용 움직이기</h2>
-  <h3>여러 가지로 응용해서 활용 가능</h3>
+{% extends 'base/base.html' %}
+
+{% block title %} JS DOM {% endblock %}
+
+{% block header %} 브라우저 이벤트 {% endblock %}
+
+{% block content %}
+  <h4>브라우저 이벤트 종류</h4>
+  <h5>click;</h5>
+  <h5>contextmenu; 마우스 오른쪽 버튼을 눌렀을 때</h5>
+  <h5>mouseover/mouseout; mousedown/mouseup; mousemove;</h5>
+  <h5>mouseover/out, mouseenter/leave 는 동작이 서로 다름, bubbling 차이라는데 정확히 모름</h5>
+  <h4>폼 요소: submit, focus</h4>
+  <h4>key ; keydown, keyup</h4>
+  <h4>문서 이벤트; DOMContentLoaded; </h4>
+  <h4>CSS 이벤트; transitionend</h4>
+  <h3>carousel 예제; 좌우로 내용 움직이기</h3>
+  <h4>여러 가지로 응용해서 활용 가능</h4>
   <div id="carousel" class="carousel">
     <button class="arrow prev">⇦</button>
     <div class="gallery">
@@ -56,8 +53,8 @@ carousel.querySelector('.next').onclick = function() {
   position = Math.max(position, -width * (listElems.length - count));
   list.style.marginLeft = position + 'px';
 };</pre>
-  <h2>축구장에서 공 움직이기</h2>
-  <h3>좌표를 활용한 여러가지로 활용/응용 가능</h3>
+  <h3>축구장에서 공 움직이기</h3>
+  <h4>좌표를 활용한 여러가지로 활용/응용 가능</h4>
     <div id="field">
       <img src="https://en.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
       . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
@@ -71,8 +68,8 @@ field.onclick = function(e) {
   ball.style.top = top + "px";
   ball.style.left = left+"px";
 }</pre>
-  <h2>개별 엘리먼트에 버튼 추가 후 개별 액션 달기; </h2>
-  <h3>간단하고 id, data 필요없음, 내용 toogle 가능</h3>
+  <h3>개별 엘리먼트에 버튼 추가 후 개별 액션 달기; </h3>
+  <h4>간단하고 id, data 필요없음, 내용 toogle 가능</h4>
     <pre>let panes = document.querySelectorAll('.pane');
 for(let pane of panes) {
   pane.insertAdjacentHTML("afterbegin", '&lt;button class="remove-button">[x]&lt;/button>');
@@ -80,16 +77,16 @@ for(let pane of panes) {
   pane.firstChild.onclick = () => pane.remove();
 }</pre>
   <section>
-    <h2>이벤트 핸들러</h2>
-    <h3>HTML 속성</h3>
-    <h3>HTML안의 on[event] 속성에 핸들러를 할당</h3>
+    <h3>이벤트 핸들러</h3>
+    <h4>HTML 속성</h4>
+    <h4>HTML안의 on[event] 속성에 핸들러를 할당</h4>
     <pre>&lt;input value="click me" onclick="alert("Click!!!");" type="button"></pre>
-    <h3>클릭하면 onclick 안의 코드가 실행됨</h3>
-    <h3>HTML 속성은 대소문자를 구분하지 안음.</h3>
-    <h3>this는 button 요소 자체를 나타냄</h3>
-    <h3>elem.onclick = func;는 한번만 적용할 수 있음</h3>
-    <h2>removeEventListener; </h2>
-    <h3>지우기 위해서는 별도의 함수로 선언해야함</h3>
+    <h4>클릭하면 onclick 안의 코드가 실행됨</h4>
+    <h4>HTML 속성은 대소문자를 구분하지 안음.</h4>
+    <h4>this는 button 요소 자체를 나타냄</h4>
+    <h4>elem.onclick = func;는 한번만 적용할 수 있음</h4>
+    <h3>removeEventListener; </h3>
+    <h4>지우기 위해서는 별도의 함수로 선언해야함</h4>
     <pre>elem.addEventListener( "click" , () => alert('감사합니다!'));
 // ....
 elem.removeEventListener( "click", () => alert('감사합니다!'));// 동작안함</pre>
@@ -97,11 +94,11 @@ elem.removeEventListener( "click", () => alert('감사합니다!'));// 동작안
 input.addEventListener("click", handler);
 // ....
 input.removeEventListener("click", handler);</pre>
-    <h3>DOMContentLoaded는 addEventListener로 해야만 함</h3>
+    <h4>DOMContentLoaded는 addEventListener로 해야만 함</h4>
   </section>
   <section>
-    <h2>이벤트 객체</h2>
-    <h3>이벤트가 발생하면 브라우저는 이벤트 객체를 만듬.</h3>
+    <h3>이벤트 객체</h3>
+    <h4>이벤트가 발생하면 브라우저는 이벤트 객체를 만듬.</h4>
     <pre>&lt;input type="button" value="클릭해 주세요." id="elem">
   elem.onclick = function(event) {
     // 이벤트 타입과 요소, 클릭 이벤트가 발생한 좌표를 보여줌
@@ -109,6 +106,4 @@ input.removeEventListener("click", handler);</pre>
     alert("이벤트가 발생한 곳의 좌표는 " + event.clientX + ":" + event.clientY +"입니다.");
   };  </pre>
   </section>
-</main>
-</body>
-</html>
+{% endblock %}

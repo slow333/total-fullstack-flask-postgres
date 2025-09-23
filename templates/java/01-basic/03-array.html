@@ -1,11 +1,10 @@
-<!--suppress ALL -->
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>배열</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Java {% endblock %}
+
+{% block header %} 배열 {% endblock %}
+
+{% block content %}
 <section>
   <h2>배열이란 ?</h2>
   <h3>서로 연속적인 같은 유형의 값의 집함</h3>
@@ -34,6 +33,4 @@ int result = add(new int[]{…}); // OK
 }
   사용: cmd; c:\...> java FileName abc 123 "hello"</pre>
 </section>
-</main>
-</body>
-</html>
+{% endblock %}

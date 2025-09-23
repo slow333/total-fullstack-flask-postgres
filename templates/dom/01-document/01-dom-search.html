@@ -1,0 +1,78 @@
+{% extends 'base/base.html' %}
+
+{% block title %} JS DOM {% endblock %}
+
+{% block header %} DOM 탐색하기 {% endblock %}
+
+{% block content %}
+<h2>DOM 노드 관계도</h2>
+<pre style="line-height: 1.2">
+                          document;
+                              ↑
+                   document.documentElement; // HTML
+                              ↑
+                      document.body; // HTML
+--------------------------------------------------
+                    parentNode/parentElement
+                              ↑
+previousSibling         <-- &lt;DIV> --->  nextSibling
+/previousElementSibling               / nextElementSibling
+                      ↓               ↓
+              firstElementChild  lastElementChild
+  </pre>
+<section>
+  <h2>childNodes, firstChild, lastChild</h2>
+  <h4>children 은 요소 노드만 출력</h4>
+  <pre>for (let elem of document.body.children) {
+  alert(elem); // DIV, UL, DIV, SCRIPT
+}</pre>
+  <h4>childNodes 컬렉션은 텍스트 노드를 포함한 모든 자식 노드를 담고 있음.</h4>
+  <h4>유사배열로 Array.from으로 변환해야 array method 사용 가능</h4>
+  <h5>DOM 컬렉션은 읽는 것만 가능합니다.</h5>
+  <h5>elem.childNodes를 참조하고 있는 도중에 DOM에 새로운 노드가 추가되거나 삭제되면,
+      변경사항이 컬렉션에도 자동으로 반영</h5>
+  <h5>컬렉션에 for..in 반복문을 사용하지 마세요</h5>
+  <pre>for (let i = 0; i < document.body.childNodes.length; i++) {
+  alert( document.body.childNodes[i] ); // Text, DIV, Text, UL, ... , SCRIPT
+}
+for (let node of document.body.childNodes) {
+  alert( node ); // Text, DIV, Text, UL, ... , SCRIPT
+}  </pre>
+  <pre>Array.from(document.body.childNodes).filter </pre>
+</section>
+<section>
+  <h3>table 탐색</h3>
+  <pre>let td = table.rows[0].cells[1];
+td.style.backgroundColor = "red"; // 강조</pre>
+  <h4>대각선 셀 구분하기</h4>
+  <pre>let table = document.getElementsByTagName("table");
+for (let i = 0; i < table.rows.length; i++) {
+  let row = table.rows[i];
+  row.cells[i].style.backgroundColor = 'red';
+}</pre>
+</section>
+
+<section>
+  <h3>주요 DOM 노드 프로퍼티는 다음과 같습</h3>
+  <h4>nodeType</h4>
+  <h5>요소 타입을 알고 싶을 때 사용합니다. 요소 노드라면 1을, 텍스트 노드라면 3을 반환합니다.
+    두 타입 외에도 각 노드 타입엔 대응하는 상숫값이 있습니다. 읽기 전용입니다.</h5>
+  <h4>nodeName/tagName</h4>
+  <h5>요소 노드의 태그 이름을 알아낼 때 사용합니다. XML 모드일 때를 제외하고 태그 이름은 항상 대문자로 변환됩니다.
+    요소 노드가 아닌 노드에는 nodeName을 사용하면 됩니다. 읽기 전용입니다.</h5>
+  <h4>innerHTML : HTML을 수정</h4>
+  <h4>outerHTML</h4>
+  <h5>elem.outerHTML에 무언가를 할당해도 elem 자체는 바뀌지 않습니다.
+    대신 새로운 HTML이 외부 컨텍스트에서 만들어지고, elem이 삭제된 자리를 채웁니다.</h5>
+  <h4>data, nodeValue</h4>
+  <h5>요소가 아닌 노드(텍스트, 주석 노드 등)의 내용을 읽을 때 쓰입니다. 두 프로퍼티는 거의 동일하게 동작합니다.
+    주로 data를 많이 사용하는 편이며 내용을 수정할 때도 이 프로퍼티를 쓸 수 있습니다.</h5>
+  <h4>textContent</h4>
+  <h5>HTML에서 모든 태그를 제외한 텍스트만 읽을 때 사용합니다.
+    할당 연산을 통해 무언가를 쓸 수도 있는데 이때 태그를 포함한 모든 특수문자는 문자열로 처리됩니다.
+    사용자가 입력한 문자를 안전한 방법으로 처리하기 때문에 원치 않는
+    HTML이 사이트에 삽입되는 것을 예방할 수 있습니다.</h5>
+  <h4>hidden</h4>
+  <h5>true로 설정하면 CSS에서 display:none을 설정한 것과 동일하게 동작합니다.</h5>
+</section>
+{% endblock %}

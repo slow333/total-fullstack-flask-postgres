@@ -1,11 +1,28 @@
 {% extends 'base/base.html' %}
 
-{% block header %} 해더 블록{% endblock %}
-{% block title %} 타이틀 : Home page{% endblock %}
+{% block title %} greencenter {% endblock %}
+{% block header %} 전체 홈페이지 내용 {% endblock %}
   
 {% block content %}
-<div style="margin-top: 60px;margin-left: 17px; min-height: calc(100vh - 102px);">
-  <h2>관련 내용은 JS Info, MDN 페이지를 참조함</h2>
+<section> 
+  <h2>python 내용 정리</h2>
+  <p>version: 3.6.8(사무실 버젼)</p>
+</section>
+<section>
+  <h2>Flask로 백엔드 구현</h2>
+  <p>version: 0.12.5</p>
+  <p>DB 연계는 psycopg2로 구현</p>
+</section>
+<section>
+  <h2>Database</h2>
+  <p>postgresql로 구현</p>
+</section>
+<section>
+  <h2>java 내용 정리</h2>
+</section>
+<section>
+  <h2>javascript 내용 정리</h2>
+  <h3>관련 내용은 JS Info, MDN 페이지를 참조함</h3>
   <ul>
     <li><a href="https://ko.javascript.info/">JS infor 페이지</a></li>
     <li><a href="https://developer.mozilla.org/ko/docs/Learn/HTML">MDN HTML 공부 페이지</a></li>
@@ -14,25 +31,26 @@
     <li><a href="https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects">
       JS 표준 내장 객체</a></li>
   </ul>
-  <div>
-    <h2>vs code 단축키</h2>
-    <ul>
-      <li>한줄 복사: alt+shift + arrow</li>
-      <li>한줄 이동: alt + arrow</li>
-      <li>줄삭제:Ctrl + Shift + K </li>
-      <li>단축키지정(user snippets): [File]-[Preference]-[Configure User Snippets]</li>
-      <pre>javascript.json에 내용 추가
-  "console.log print":{
-    "prefix": "cl",
-    "body": [ "console.log()" ],
-    "description": "Log output to console"  }</pre>
-    </ul>
-    <h2>web storm 단축키</h2>
-    <li>console.log: log + tab</li>
-  </div>
-  <div>
-<h2>STS 단축키</h2>
-<pre> preference > General > keys 에 있음 여기서 수정가능
+</section>
+<section>
+  <h3>vs code 단축키</h3>
+  <ul>
+    <li>한줄 복사: alt+shift + arrow</li>
+    <li>한줄 이동: alt + arrow</li>
+    <li>줄삭제:Ctrl + Shift + K </li>
+    <li>단축키지정(user snippets): [File]-[Preference]-[Configure User Snippets]</li>
+    <pre>javascript.json에 내용 추가
+"console.log print":{
+  "prefix": "cl",
+  "body": [ "console.log()" ],
+  "description": "Log output to console"  }</pre>
+  </ul>
+  <h3>web storm 단축키</h3>
+  <p>console.log: log + tab</p>
+</section>
+  <section>
+<h3>STS 단축키</h3>
+<pre style="font-size: 1rem;"> preference > General > keys 에 있음 여기서 수정가능
 커서가 위치한 라인 지우기 : ctrl + d
 화면키우기 : ctrl + '+'/'-'(숫자 패드 아님)
 한줄복사 : ctrl + alt ↑,↓
@@ -68,17 +86,15 @@ ToString 만들기 : alt + shift + s 누르고 s => Generate
 .java 및 .class 등 파일 검색 : ctrl + shift + r
 해당 키워드 전체 파일에서 검색 : ctrl + h => File Search 탭에서 키워드 검색
 소스단에서 원하는 line으로 이동 : ctrl + l</pre>
-  </div>
-  <div>
-    <h2>git; command shell</h2>
-    <pre>git init // 초기 시작시 에만 필요
-  git add .
-  git branch -M main // 초기 시작시 에만 필요
-  git remote add origin git@github.com:slow333/js-spring-home.git // 초기 시작시 에만 필요
-  git commit -m 'comments what i want'
-  git push -u origin main
+  </section>
+  <h3>git; command shell</h3>
+  <pre>git init // 초기 시작시 에만 필요
+git add .
+git branch -M main // 초기 시작시 에만 필요
+git remote add origin git@github.com:slow333/js-spring-home.git // 초기 시작시 에만 필요
+git commit -m 'comments what i want'
+git push -u origin main
 
-  git remote remove git@github.com:slow333/js-spring-home.git </pre>
-  </div>
-</div>
+git remote remove git@github.com:slow333/js-spring-home.git </pre>
+
 {% endblock %}

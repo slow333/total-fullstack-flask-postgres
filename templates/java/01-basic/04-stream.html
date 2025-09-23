@@ -1,11 +1,10 @@
-<!--suppress ALL -->
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>stream</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Java {% endblock %}
+
+{% block header %} stream {% endblock %}
+
+{% block content %}
   <p>Java 8부터 추가된 기술로 람다를 활용해 배열과 컬렉션을 함수형으로 간단하게 처리할 수 있는 기술이다.</p>
   <p>foreach, map, sort, reduce 등을 통합해서 사용 가능</p>
 <section>
@@ -153,6 +152,4 @@ List&lt;String> list = new ArrayList&lt;>();
       System.out.println(fruit);
   } </pre>
   </section>
-</main>
-</body>
-</html>
+{% endblock %}

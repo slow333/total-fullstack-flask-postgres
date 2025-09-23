@@ -1,11 +1,11 @@
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>OOP 기본</h1>
-  <section>
+{% extends 'base/base.html' %}
+
+{% block title %} Java {% endblock %}
+
+{% block header %} OOP 기본 {% endblock %}
+
+{% block content %}
+<section>
     <h2>객체와 인스턴스</h2>
     <h3>객체는 인스턴스를 포함하는 일반적인 의미</h3>
     <h3>클래스 -> 인스턴스화 -> 인스턴스(객체)</h3>
@@ -39,6 +39,4 @@
      메서드가 종료되면 메모리를 반환</h3>
   <h3>heap : 인스턴스가 생성되는 공간, new 연산자에 의해서 생성되고 배열과 객체는 모두 여기에 생성</h3>
 </section>
-</main>
-</body>
-</html>
+{% endblock %}

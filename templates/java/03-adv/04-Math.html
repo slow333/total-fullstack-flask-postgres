@@ -1,10 +1,10 @@
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>Math class</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Java {% endblock %}
+
+{% block header %} Math class {% endblock %}
+
+{% block content %}
 <section>
   <h3>Method; 모두 static 임</h3>
   <h4>int/float/long/double abs(int || float || double || long)</h4>
@@ -36,6 +36,4 @@
             - Byte,Short,Integer,Long,Float,Double,BigInteger,BigDecimal
 </pre>
 </section>
-</main>
-</body>
-</html>
+{% endblock %}

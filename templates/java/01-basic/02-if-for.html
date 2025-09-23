@@ -1,10 +1,10 @@
-<html lang="en">
-<head>
-  <script src="/js/backup/loadScript.js"></script>
-</head>
-<body>
-<main>
-<h1>조건문과 반복문</h1>
+{% extends 'base/base.html' %}
+
+{% block title %} Java {% endblock %}
+
+{% block header %} 조건문과 반복문 {% endblock %}
+
+{% block content %}
 <section>
   <h2>조건문</h2>
   <h3>Math.random()</h3>
@@ -25,6 +25,4 @@
   for( ..) {
     break Loop1;}
 }</pre>
-</main>
-</body>
-</html>
+{% endblock %}
