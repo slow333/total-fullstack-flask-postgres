@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+
+{% block import %} 
+<link rel="stylesheet" href="/static/css/page/auth.css" >
+{% endblock %}
+{% block title %} DB App{% endblock %}
+{% block header %}My App List{% endblock %}
+  
+{% block content %}
+  <div class="button-container">
+    <button><a href="/app/todo/">Users</a></button>
+    <button><a href="/app/todo/">Todo</a></button>
+    <button><a href="/app/blog/">Blog</a></button>
+    <button><a href="/app/topic/">Topic</a></button>
+  </div>
+{% endblock %}

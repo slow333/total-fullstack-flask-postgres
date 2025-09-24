@@ -1,45 +1,33 @@
-import os
-import psycopg2
-import psycopg2.extras
+import psycopg2 # type: ignore
+from flask import g
+from flask import current_app # type: ignore
 
-import click
-from flask import current_app, g
+db_url_mydb = "postgresql://postgres:1111@localhost/mydb"
+db_url_flaskdb = "postgresql://postgres:1111@localhost/flaskr"
 
-# os.environ.get('DATABASE_URL')
-# DATABASE = os.environ['DATABASE_URL']
-DATABASE = 'postgresql://postgres:1111@localhost/flaskr'
+conn_mydb = psycopg2.connect(db_url_mydb)
 
-def get_db():
-  """Get a database connection from the application context."""
-  if 'db' not in g:
-    g.db = psycopg2.connect(DATABASE, cursor_factory=psycopg2.extras.DictCursor)
-  return g.db
+# cursor_mydb = conn_mydb.cursor()
+# cursor_flaskdb = conn_flaskdb.cursor()
+
+def get_mydb():
+  if 'mydb' not in g:
+    g.mydb = conn_mydb
+  return g.mydb
+
+def get_flaskdb():
+  if 'flaskdb' not in g:
+    g.flaskdb = psycopg2.connect(db_url_flaskdb)
+  return g.flaskdb
 
 def close_db(e=None):
-  """Close the database connection."""
-  db = g.pop('db', None)
-
-  if db is not None:
-    db.close()
-
-def init_db():
-  """Initialize the database with the schema."""
-  db = get_db()
-
-  with current_app.open_resource('schema.sql') as f:
-    # psycopg2 requires a cursor to execute commands
-    with db.cursor() as cur:
-      cur.execute(f.read().decode('utf8'))
-  # Commit the changes to make them persistent
-  db.commit()
-
-@click.command('init-db')
-def init_db_command():
-  """Clear the existing data and create new tables."""
-  init_db()
-  click.echo('Initialized the PostgreSQL database.')
+  mydb = g.pop('mydb', None)
+  if mydb is not None:
+    mydb.close()
+  flaskdb = g.pop('flask', None)
+  if flaskdb is not None:
+    flaskdb.close()
 
 def init_app(app):
   """Register database functions with the Flask app."""
   app.teardown_appcontext(close_db)
-  app.cli.add_command(init_db_command)

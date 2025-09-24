@@ -1,6 +1,7 @@
 from flask import Flask, render_template as render, jsonify # type: ignore
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'your_super_secret_key_here'
 
 @app.route("/")
 def index():
@@ -23,6 +24,12 @@ app.register_blueprint(java_bp)
 
 from bp.routes.dom_bp import bp as dom_bp
 app.register_blueprint(dom_bp)
+
+from bp.myapp.myapp_bp import bp as myapp_bp
+app.register_blueprint(myapp_bp)
+
+from bp.myapp.auth import bp as auth
+app.register_blueprint(auth)
 
 # ==============================
 # 공통 적용 사항

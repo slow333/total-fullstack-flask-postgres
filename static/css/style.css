@@ -12,12 +12,25 @@
 :root {
   --font-basic: 'Noto Sans KR', sans-serif, serif ;
   --font-header: 'Roboto', 'Noto Sans KR', sans-serif;
-  --text-sm: 12px;
+  --text-xxl: 1.8rem;
+  --text-xl: 1.6rem;
+  --text-lg: 1.2rem;
+  --text-md: 1rem;
+  --text-sm: 0.9rem;
+
+  --color-blue: #0d6efd;
+  --color-indigo: #6610f2;
+  --color-orange: #fd7e14;
+  --color-green: #198754;
+  --color-red: #dc3545;
+  --color-yellow: #ffc107;
+  --color-pink: #ec4899;
+  --color-teal: #20c997;
+  --color-cyan: #0dcaf0;
+  --color-gray: #adb5bd;
+
   --transition: 0.4s ease-in-out;
   --shadow: gray 0px 0px 10px 0px;
-  --navbar-bg: cornflowerblue;
-  --navbar-color: rgb(253, 254, 255);
-  --subbar-bg :rgb(156, 189, 252);
   --bg-shadow: rgb(0, 102, 105) 0px 0px 5px;
 }
 body {
@@ -41,7 +54,7 @@ body {
   background-color: white;
 }
 
-.navbar-btn, .user-menu li a{
+.navbar-btn {
   border: none;
   padding: 3px 9px;
   border-radius: 4px;
@@ -67,14 +80,17 @@ body {
   align-items: center;
   justify-content: center;
   /* gap: 3px; */
+  padding:0;
+  margin:0;
 }
 
-.user-menu a {
+.user-menu a, .user-menu li {
   text-decoration: none;
   font-size: 0.8rem;
   font-family:'Lucida Sans Regular',Verdana, sans-serif;
   font-weight: 600;
-  padding: 3px;
+  padding: 0;
+  margin:0;
 }
 .user-menu a:any-link {
   color: #111;
@@ -269,4 +285,23 @@ section {
 
 #scrollTopBtn:hover {
   background-color: #333;
+}
+input {
+  width:100%;
+  padding: 10px;
+  font-size: var(--text-md);
+}
+button, input[type='submit']{
+  min-width: 50px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--color-blue);
+  color: white;
+  cursor: pointer;
+  font-size: var(--text-lg);
+  text-decoration: none;
+}
+label {
+  font-size: var(--text-lg);
 }

@@ -16,6 +16,9 @@
   </header>
 
   <main>
+    {% for message in get_flashed_messages() %}
+      <div class="flash-message">{{ message }} <span class="close"> X </span></div>
+    {% endfor %}
     {% block content %}{% endblock %}
   </main>
   
@@ -27,6 +30,10 @@
     import { selectNavItems } from "/static/js/selectNav.js";
     import "/static/js/scrollTop.js"
     selectNavItems()
+
+    document.querySelector(".flash-message")?.addEventListener("click", function() {
+        this.remove();
+    })
   </script>
 </body>
 </html>

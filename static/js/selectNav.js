@@ -28,7 +28,7 @@ async function setSubMenus(item){
   document.querySelectorAll(".navbar-btn").forEach(item => {
     item.classList.remove('curr-url');
   });
-  document.querySelector('#'+item).classList.add('curr-url');
+  document.querySelector('#'+item)?.classList.add('curr-url');
   switch (item) {
     case 'python':
       await loadByFile('/static/nav-html/_python-nav.html');
@@ -52,7 +52,7 @@ async function setSubMenus(item){
       await loadByFile('/static/nav-html/_dom-nav.html');
       break;                
     default:
-      await loadByFile('/static/nav-html/_home-nav.html');
+      await loadByFile('/static/nav-html/_null-nav.html');
       break;
   }
 }

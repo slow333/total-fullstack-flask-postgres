@@ -1,45 +1,24 @@
-from flask import Blueprint, request, redirect # type: ignore
-from sqlalchemy import insert, delete, update, select
+from flask import Blueprint, request, redirect, render_template as render # type: ignore
+from db import get_mydb as get_db # type: ignore
 
-from module.body import body
-from module.form_user import createUserForm, editUserForm, deleteUserForm
-from db.users.create_users_table import users
-from db.users.connect_db import engine
-from module.user_list import getUsersList, getUsersDetail
-
-users_db_bp = Blueprint("crud_db", __name__, url_prefix="/users")
-
-def all_users():
-  with engine.connect() as conn:
-    result = conn.execute(select([users]).order_by(users.c.id.desc()))
-    return result.fetchall()
+users_db_bp = Blueprint("crud_db", __name__, url_prefix="/apps/users")
 
 @users_db_bp.route("/")
-def users_home():
-  content = f'''
-  <h1>users DB를 조회합니다.</h1>
-  <div class="links-list">
-    <div>전체 사용자 리스트 : <a href="/users/all">All Users</a></div>
-    <hr style="margin: 10px 0px;">
-    <div>사용자 새로 생성 : <a href="/users/create">Create User</a></div>
-  </div>
-  '''
-  return body("users DB", content)
-
-@users_db_bp.route("/all")
 def users_all():
     page = int(request.args.get("page", 1))
     per_page = 5  # 한 페이지에 5명씩
     offset = (page - 1) * per_page
 
-    with engine.connect() as conn:
-      result = conn.execute(
-          select([users]).order_by(users.c.id.desc()).offset(offset).limit(per_page)
-      )
-      users_page = result.fetchall()
+    db = get_db()
 
+    with db.cursor() as cursor:
+      cursor.execute('SELECT * FROM users;')
+      users_page = cursor.fetchall()
+
+    with db.cursor() as cur:
       # 전체 사용자 수 구하기
-      total = conn.execute(select([users])).rowcount
+      cur.execute('SELECT COUNT(*) FROM users;')
+      total = cur.fetchone()[0]
 
     users_list = getUsersList(users_page)
 
@@ -135,3 +114,9 @@ def delete_user(id):
       user = conn.execute(sel_user).fetchone()
     return body("Delete User", deleteUserForm(user))
   return None
+
+def getUsersList(users):
+  user_list = ''
+  for user in users:
+    user_list += f"<div>{user['firstname']} {user['lastname']} {user['email']}</div>"
+  return user_list
