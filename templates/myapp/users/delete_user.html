@@ -10,7 +10,7 @@
     <a href="/apps/users/create">Create User</a>
     <a href="/apps/users/">HOME</a>
   </div>
-  <form action="/apps/users/{{  user['id'] }}/delete" method="POST">
+  <form action="/apps/users/{{  user['id'] }}/delete" method="POST" class="auth-form">
     <input type="submit" value="Delete">
   </form>
 {% endblock %}

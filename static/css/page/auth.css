@@ -1,7 +1,7 @@
-.temp-list {
+.topic-list {
   justify-content: start;
 }
-.temp-list a {
+.topic-list a {
   background-color: var(--c-green);
   color: white;
 }
@@ -12,14 +12,23 @@
   gap:10px;
 }
 
-.pagenation {
-  display: flex;
-
+.blog-list, .todo-list {
+  display:flex;
+  justify-content: space-between;
+  border: 1px solid var(--c-border);
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
 }
-.pagenation a.page-link {
- border:none;
- text-align: center;
- margin: 0;
- padding: 0 2px;
- min-width: none;
+.todo-item  {
+  display: flex;
+  flex:1 1 20px;
+  justify-content: start;
+  align-items:baseline;
+  gap: 10px;
+}
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 }

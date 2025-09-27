@@ -51,23 +51,23 @@ def login_users():
         password = request.form.get('password')
 
         error = None
-        user = None
         db = get_db()
         with db.cursor() as cur:
             cur.execute('SELECT * FROM users WHERE username = %s ;', (username,))
             user = cur.fetchone()
         if user is None:
-            flash('Incorrect username.')
-            return render('/auth/login')
-        elif not check_password_hash(user[2], password):
-            flash('Incorrect password.')
-            return redirect('/auth/login')
+            error = 'Incorrect username.'
+        elif not check_password_hash(user['password'], password):
+            error = 'Incorrect password.'
         
         if error is None:
             session.clear()
-            session['user_id'] = user[0]
+            session['user_id'] = user['id']
+            flash('Welcome, {}!'.format(user['username']))
             return redirect('/apps/')
-        return flash(error)
+        else:
+            flash(error)
+            return render('myapp/auth/login.html')
 
 @bp.before_app_request
 def load_logged_in_user():

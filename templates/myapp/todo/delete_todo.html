@@ -1,0 +1,14 @@
+{% extends 'base/auth_base.html' %}
+
+{% block title %} MY Topic app {% endblock %}
+{% block header %}
+ Delete Todo
+{% endblock %}
+
+{% block content %}
+  <p>Are you sure you want to delete "{{ todo['title'] }}" todo?</p>
+  <form action="/apps/todos/{{ todo['id'] }}/delete" method="post"  class="auth-form">
+    <input type="submit" value="Delete">
+  </form>
+  <a href="/apps/todos/">Cancel</a>
+{% endblock %}

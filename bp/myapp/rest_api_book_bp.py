@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from db import get_mydb as get_db # type: ignore
 
-book_bp = Blueprint('book_bp_psycopg2', __name__, url_prefix='/app/books')
+book_bp = Blueprint('book_bp_psycopg2', __name__, url_prefix='/apps/books')
 
 @book_bp.route('/', methods=['GET'])
 def get_books():

@@ -1,0 +1,48 @@
+{% extends 'base/auth_base.html' %}
+
+{% block title %} MY Topic app {% endblock %}
+{% block header %}
+ Blogs List
+{% endblock %}
+
+{% block content %}
+  {% if g.user %}
+    <div class="link-list temp-list" style="display: flex; justify-content: end;">
+      <a href="/apps/blogs/create">Create Blog</a>
+  </div>
+  {% endif %}
+    
+  {% for blog in blogs %}
+    <div class="blog-list">
+      <div class="blog-item">        
+        <h4>{{ blog['title'] }} <span style="font-size: 0.8rem;">by {{ blog['username'] }}
+        on: {{ blog['created'] if blog['created'] else ''}} </span>
+        </h4>
+        <p>{{ blog['content'] }}</p>
+        <input type="text" value="{{ blog['comment'] }}">
+      </div>
+      <div>
+        {% if g.user['id'] == blog['author_id'] %}
+          <a class="action" href="/apps/blogs/{{ blog['id'] }}/edit">Edit</a>
+          <a class="action" href="/apps/blogs/{{ blog['id'] }}/delete">Delete</a>
+        {% endif %}
+      </div>
+    </div>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+    <div class="link-list pagenation">
+      <a href="/apps/blogs/?page={{1 if page > 1 else ''}}">First</a>
+      <a href="/apps/blogs/?page={{page - 1 if page > 1 else ''}}">Pre</a>
+      {% for i in range(start_page, end_page + 1) %}
+        {% if i == page %}
+          <strong style="color: red;">{{i}}</strong>
+        {% else %}
+          <a class="page-link" href="/apps/blogs/?page={{i}}">{{i}}</a> 
+        {% endif %}
+      {% endfor %}
+      <a href="/apps/blogs/?page={{page + 1 if blogs_page_len == per_page else ''}}">Next</a>
+      <a href="/apps/blogs/?page={{total_pages if page < total_pages else ''}}">Last</a>
+  </div>
+{% endblock %}

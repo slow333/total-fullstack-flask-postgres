@@ -10,7 +10,7 @@
     <a href="/apps/users/create">Create User</a>
     <a href="/apps/users/">HOME</a>
   </div>
-  <form action="/apps/users/{{  user['id'] }}/edit" method="POST">
+  <form action="/apps/users/{{  user['id'] }}/edit" method="POST" class="auth-form">
     firstname: <input type="text" name="firstname" placeholder="firstname" value="{{ user['first_name'] }}"><br>
     lastname:<input type="text" name="lastname" placeholder="lastname" value="{{ user['last_name'] }}"><br>
     <input type="text" name="email" placeholder="email" value="{{ user['email'] }}">

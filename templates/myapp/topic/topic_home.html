@@ -6,10 +6,10 @@
 {% endblock %}
   
 {% block content %}
-<div class="link-list topic-list">
+<div class="link-list temp-list">
   {% for topic in topics %}
-    <a class="action" href="/app/topic/{{ topic.id }}">{{ topic.title }}</a>
+    <a class="action" href="/apps/topic/{{ topic.id }}">{{ topic.title }}</a>
   {% endfor %}
-  <a class="action" href="/app/topic/create">Create Topic</a>
+  <a class="action" href="/apps/topic/create">Create Topic</a>
 </div>
 {% endblock %}

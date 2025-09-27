@@ -6,14 +6,17 @@
 {% endblock %}
   
 {% block content %}
-<div class="button-container">
+<div class="link-list topic-list">
   {% for topic in topics %}
-    <button><a href="/app/topic/{{ topic.id }}">{{ topic.title }}</a></button>
+    <a class="action" href="/apps/topic/{{ topic.id }}">{{ topic.title }}</a>
   {% endfor %}
-  <a href="/app/topic/create">Create Topic</a>
+  <a class="action" href="/apps/topic/create">Create Topic</a>
 </div>
   <hr>
   <h3>{{ topic.content}}</h3>
-  <a href="/app/topic/{{ topic.id }}/edit">Edit</a>
-  <a href="/app/topic/{{ topic.id }}/delete">Delete</a>
+  <div class="link-list">
+    <a href="/apps/topic/{{ topic.id }}/edit">Edit</a>
+    <a href="/apps/topic/{{ topic.id }}/delete">Delete</a>
+
+  </div>
 {% endblock %}

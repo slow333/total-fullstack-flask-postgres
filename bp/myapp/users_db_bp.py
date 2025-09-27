@@ -16,7 +16,6 @@ def users_():
   with db.cursor() as cursor:
     cursor.execute('SELECT * FROM users ORDER BY id DESC LIMIT %s OFFSET %s;', (per_page, offset))
     users_page = cursor.fetchall()
-    print(users_page)
 
   with db.cursor() as cur:
     cur.execute('SELECT COUNT(*) FROM users;')

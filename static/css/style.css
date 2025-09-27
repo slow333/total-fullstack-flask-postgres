@@ -345,8 +345,52 @@ label {
   padding: 2px 8px;
   font-size: var(--text-sm);
   transition: all 0.3s ease;
+  text-decoration: none;
+}
+a.action:any-link {
+  font-weight: 600;
+  font-family: 'Noto Sans KR', serif;
+  text-decoration: none;
 }
 
 .link-list a:hover , a.action:hover {
   text-decoration: underline;
+}
+
+
+.pagenation {
+  display: flex;
+}
+.pagenation a.page-link {
+ border:none;
+ text-align: center;
+ margin: 0;
+ padding: 0 2px;
+ min-width: none;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 600px;
+  margin: auto;
+  margin-top: 2rem;
+}
+.auth-form label {
+  font-weight: bold;
+  display: block;
+}
+.auth-form textarea {
+  min-height: 100px;
+  width:100%;
+  font-size: 1rem;
+  padding: 10px
+}
+.auth-form input[type="text"] {
+  font-size: 1rem;
+  padding: 10px;
+  width:100%;
+  box-sizing: border-box;
+  
 }

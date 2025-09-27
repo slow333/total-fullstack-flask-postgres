@@ -1,0 +1,51 @@
+{% extends 'base/auth_base.html' %}
+
+{% block title %} MY Topic app {% endblock %}
+{% block header %}
+ Todo List
+{% endblock %}
+
+{% block content %}
+  {% if g.user %}
+    <div class="link-list temp-list" style="display: flex; justify-content: end;">
+      <a href="/apps/todos/create">Create todo</a>
+  </div>
+  {% endif %}
+
+  {% for todo in todos %}
+    <div class="todo-list">
+      <div>
+        <div class="todo-item">
+          <input type="checkbox" {% if todo['done'] %} checked {% endif %} >
+          <h4>{{ todo['title'] }} </h4>
+          <div style="font-size: 0.8rem;">by {{ g.user['username'] }}
+            on {{ todo['created'].strftime('%Y-%m-%d') if todo['created'] else ''}} 
+          </div>
+        </div>
+        <div>{{ todo['content'] }}</div>
+      </div>
+      <div>
+        {% if g.user['id'] == todo['author_id'] %}
+          <a class="action" href="/apps/todos/{{ todo['id'] }}/edit">Edit</a>
+          <a class="action" href="/apps/todos/{{ todo['id'] }}/delete">Delete</a>
+        {% endif %}
+      </div>
+    </div>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+    <div class="link-list pagenation">
+      <a href="/apps/todos/?page={{1 if page > 1 else ''}}">First</a>
+      <a href="/apps/todos/?page={{page - 1 if page > 1 else ''}}">Pre</a>
+      {% for i in range(start_page, end_page + 1) %}
+        {% if i == page %}
+          <strong style="color: red;">{{i}}</strong>
+        {% else %}
+          <a class="page-link" href="/apps/todos/?page={{i}}">{{i}}</a> 
+        {% endif %}
+      {% endfor %}
+      <a href="/apps/todos/?page={{page + 1 if todos_page_len == per_page else ''}}">Next</a>
+      <a href="/apps/todos/?page={{total_pages if page < total_pages else ''}}">Last</a>
+  </div>
+{% endblock %}

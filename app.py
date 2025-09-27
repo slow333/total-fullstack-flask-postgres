@@ -41,7 +41,14 @@ app.register_blueprint(topic_bp)
 from bp.myapp.users_db_bp import bp as users_db_bp
 app.register_blueprint(users_db_bp)
 
+from bp.myapp.blog_db_auth_bp import bp as blog_db_auth_bp
+app.register_blueprint(blog_db_auth_bp)
 
+from bp.myapp.todo_db_auth_bp import bp as todo_db_auth_bp
+app.register_blueprint(todo_db_auth_bp)
+
+from bp.myapp.rest_api_book_bp import book_bp as rest_api_book_bp
+app.register_blueprint(rest_api_book_bp)
 # ==============================
 # 공통 적용 사항
 # ==============================

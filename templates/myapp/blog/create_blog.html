@@ -1,0 +1,18 @@
+{% extends 'base/auth_base.html' %}
+
+{% block title %} MY Topic app {% endblock %}
+{% block header %}
+ Create Blogs
+{% endblock %}
+
+{% block content %}
+  <form method="post" class="auth-form">
+    <label for="title">Title</label>
+    <input name="title" id="title" value="{{ request.form['title'] }}" required >
+    <label for="content">Content</label>
+    <textarea name="content" id="content" required >{{ request.form['content'] }}</textarea>
+    <label for="comment">Comment</label>
+    <textarea name="comment" id="comment" >{{ request.form['comment'] }}</textarea>
+    <input type="submit" value="Create" >
+  </form>
+{% endblock %}
