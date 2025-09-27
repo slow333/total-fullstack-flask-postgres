@@ -38,21 +38,38 @@ body {
   font-family: var(--fontbasic);
   height: 100%;
   position: relative;
+  max-width: 920px;
+  margin: 0 auto;
+}
+main {
+  padding: 6px 24px;
+  margin: 0 auto;
+}
+
+section {
+  border-bottom: 0.6px dotted #aaa;
+  padding: 0 0 14px 0;
 }
 /* ======== main menu ========== */
+.navbar-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
 .navbar {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
-  position: relative;
-  padding: 4px;
-  width: 100%;
   position: fixed;
   top: 0;
   z-index: 10;
   padding: 4px 14px;
   border-bottom: 1px solid #444;
   background-color: white;
+  width: 100%;
+  max-width: 920px;
+  box-shadow: var(--shadow);
 }
 
 .navbar-btn {
@@ -80,7 +97,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* gap: 3px; */
   padding:0;
   margin:0;
 }
@@ -108,10 +124,10 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  z-index: 20;
 }
 .sub-menu a {
   display: inline-block;
-  /* min-width: 90px; */
   text-align: center;
   font-size: 0.84rem; 
   font-weight: 600;
@@ -164,6 +180,7 @@ body {
   padding:0;
   min-width: 120px;
   box-shadow: #999 2px 2px 0px 0px;
+  z-index: 10;
 }
 
 .sub-menu > ul li:hover ul{
@@ -216,16 +233,7 @@ header, h1 {
   font-family: var(--font-header);
   padding: 8px 0 4px 0;
   border-bottom: 1px solid var(--c-dark-gray);
-  width: 90%;
   margin: 6px auto 0 auto;
-}
-main {
-  padding: 6px 24px;
-}
-
-section {
-  border-bottom: 0.6px dotted #aaa;
-  padding: 0 0 14px 0;
 }
 
 h2, h3, h4, h5, h6 {
@@ -272,7 +280,6 @@ pre, xmp {
   font-family: 'consolas', 'courier new', sans-serif;
   font-size: 0.94rem;
   font-weight: 500;
-  /* background-color: #fcfcfc; */
   padding: 8px 12px;
   margin: 10px 0;
   border-left: 1px solid var(--c-gray);
@@ -303,19 +310,23 @@ pre, xmp {
 /* ========= 콤퍼넌트 =========== */
 input {
   width:100%;
-  padding: 10px;
+  padding: 2px 10px;
   font-size: var(--text-md);
 }
 button, input[type='submit']{
   min-width: 50px;
-  padding: 10px;
+  padding: 2px 10px;
   border: none;
   border-radius: 4px;
   background-color: var(--c-blue);
   color: white;
   cursor: pointer;
-  font-size: var(--text-lg);
+  font-size: var(--text-md);
   text-decoration: none;
+}
+button:hover, input[type='submit']:hover {
+  opacity: 0.8;
+  transition: all 0.3s ease-in-out;
 }
 form {
   display: flex;
@@ -357,7 +368,6 @@ a.action:any-link {
   text-decoration: underline;
 }
 
-
 .pagenation {
   display: flex;
 }
@@ -377,6 +387,9 @@ a.action:any-link {
   margin: auto;
   margin-top: 2rem;
 }
+.auth-form input[type="submit"] {
+  padding: 10px;
+}
 .auth-form label {
   font-weight: bold;
   display: block;
@@ -392,5 +405,4 @@ a.action:any-link {
   padding: 10px;
   width:100%;
   box-sizing: border-box;
-  
 }

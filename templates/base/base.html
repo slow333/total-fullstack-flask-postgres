@@ -10,12 +10,11 @@
     {% include 'base/_navbar.html' %}
     <div class="sub-menu"></div>
   </div>
-
-  <header>
-    {% block header %}{% endblock %}
-  </header>
-
+  
   <main>
+    <header>
+      {% block header %}{% endblock %}
+    </header>
     {% for message in get_flashed_messages() %}
       <div class="flash-message">{{ message }} <span class="close"> X </span></div>
     {% endfor %}

@@ -6,9 +6,9 @@
 {% endblock %}
 
 {% block content %}
+<form action="/apps/todos/{{ todo['id'] }}/delete" method="post"  class="auth-form">
   <p>Are you sure you want to delete "{{ todo['title'] }}" todo?</p>
-  <form action="/apps/todos/{{ todo['id'] }}/delete" method="post"  class="auth-form">
-    <input type="submit" value="Delete">
-  </form>
+  <input type="submit" value="Delete">
   <a href="/apps/todos/">Cancel</a>
+</form>
 {% endblock %}

@@ -8,7 +8,7 @@ bp = Blueprint("blog_db_auth_bp", __name__, url_prefix="/apps/blogs")
 @bp.route("/")
 def users_():
   page = request.args.get("page", 1, type=int)
-  per_page = 10  # 한 페이지에 5명씩
+  per_page = 6  # 한 페이지에 5명씩
   offset = (page - 1) * per_page
 
   db = get_db()

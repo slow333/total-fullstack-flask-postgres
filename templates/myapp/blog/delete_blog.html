@@ -6,8 +6,9 @@
 {% endblock %}
 
 {% block content %}
-  <p style="margin-top: 2rem;">Are you sure you want to delete "{{ blog['title'] }}"?</p>
-  <form action="/apps/blogs/{{ blog['id'] }}/delete" method="post" class="auth-form">
+<form action="/apps/blogs/{{ blog['id'] }}/delete" method="post" class="auth-form">
+    <p style="margin-top: 2rem;">Are you sure you want to delete "{{ blog['title'] }}"?</p>
     <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+    <a class="action" href="/apps/blogs/">cancel</a>
   </form>
 {% endblock %}

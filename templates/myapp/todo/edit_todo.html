@@ -16,5 +16,6 @@
     <label for="done">Done</label>
     <input type="checkbox" name="done" id="done" {{ 'checked' if todo['done'] else '' }} >
     <input type="submit" value="Update" >
+    <a class="action" href="/apps/todos/">cancel</a>
   </form>
 {% endblock %}

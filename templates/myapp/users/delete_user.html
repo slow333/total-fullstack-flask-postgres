@@ -6,11 +6,9 @@
 {% endblock %}
   
 {% block content %}
-  <div class="link-list temp-list">
-    <a href="/apps/users/create">Create User</a>
-    <a href="/apps/users/">HOME</a>
-  </div>
+
   <form action="/apps/users/{{  user['id'] }}/delete" method="POST" class="auth-form">
     <input type="submit" value="Delete">
+    <a class="action" href="/apps/users/">cancel</a>
   </form>
 {% endblock %}
