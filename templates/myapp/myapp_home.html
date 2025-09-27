@@ -1,16 +1,15 @@
-{% extends 'base/base.html' %}
+{% extends 'base/auth_base.html' %}
 
-{% block import %} 
-<link rel="stylesheet" href="/static/css/page/auth.css" >
-{% endblock %}
-{% block title %} DB App{% endblock %}
-{% block header %}My App List{% endblock %}
-  
+{% block title %} DB App {% endblock %}
+{% block header %} My App List {% endblock %}
+
 {% block content %}
-  <div class="button-container">
-    <button><a href="/app/todo/">Users</a></button>
-    <button><a href="/app/todo/">Todo</a></button>
-    <button><a href="/app/blog/">Blog</a></button>
-    <button><a href="/app/topic/">Topic</a></button>
-  </div>
+<h3>DB App List</h3>
+<h4>위 링크를 찾아가세요.</h4>
+<div class="link-list">
+  <a href="/auth/login">Login</a>
+  <a href="/auth/register">Register</a>
+  <a href="/auth/logout">Logout</a>
+  <a href="/auth/account">Account</a>
+</div>
 {% endblock %}

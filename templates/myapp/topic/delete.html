@@ -1,0 +1,12 @@
+{% extends 'base/auth_base.html' %}
+
+{% block title %}MY Topic app{% endblock %}
+{% block header %}
+ Delete topic
+{% endblock %}
+  
+{% block content %}
+  <form action="/app/topic/{{ topic.id }}/delete" method="post">
+    <input type="submit" value="Delete"></form>
+    <p>Are you sure you want to delete "{{ topic.title }}"?</p>
+{% endblock %}

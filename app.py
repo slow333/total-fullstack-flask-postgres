@@ -6,7 +6,9 @@ app.config['SECRET_KEY'] = 'your_super_secret_key_here'
 @app.route("/")
 def index():
   return render("home.html")
-
+# ==============================
+# contents pages
+# ==============================
 from bp.routes.python_bp import bp as python_bp
 app.register_blueprint(python_bp)
 
@@ -24,12 +26,21 @@ app.register_blueprint(java_bp)
 
 from bp.routes.dom_bp import bp as dom_bp
 app.register_blueprint(dom_bp)
+# ==============================
+# auth 관련 페이지
+# ==============================
+from bp.myapp.auth import bp as auth
+app.register_blueprint(auth)
 
 from bp.myapp.myapp_bp import bp as myapp_bp
 app.register_blueprint(myapp_bp)
 
-from bp.myapp.auth import bp as auth
-app.register_blueprint(auth)
+from bp.myapp.topic_bp import bp as topic_bp
+app.register_blueprint(topic_bp)
+
+from bp.myapp.users_db_bp import bp as users_db_bp
+app.register_blueprint(users_db_bp)
+
 
 # ==============================
 # 공통 적용 사항

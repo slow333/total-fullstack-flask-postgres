@@ -1,0 +1,16 @@
+{% extends 'base/auth_base.html' %}
+
+{% block title %}MY Topic app{% endblock %}
+{% block header %}
+ Create topic
+{% endblock %}
+  
+{% block content %}
+  <form action="/app/topic/create" method="post">
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title">
+    <label for="content">Content</label>
+    <input type="text" name="content" id="content">
+    <input type="submit" value="Create">
+  </form>
+{% endblock %}

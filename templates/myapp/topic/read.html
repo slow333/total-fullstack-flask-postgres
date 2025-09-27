@@ -1,0 +1,19 @@
+{% extends 'base/auth_base.html' %}
+
+{% block title %}MY Topic app{% endblock %}
+{% block header %}
+ Read topic
+{% endblock %}
+  
+{% block content %}
+<div class="button-container">
+  {% for topic in topics %}
+    <button><a href="/app/topic/{{ topic.id }}">{{ topic.title }}</a></button>
+  {% endfor %}
+  <a href="/app/topic/create">Create Topic</a>
+</div>
+  <hr>
+  <h3>{{ topic.content}}</h3>
+  <a href="/app/topic/{{ topic.id }}/edit">Edit</a>
+  <a href="/app/topic/{{ topic.id }}/delete">Delete</a>
+{% endblock %}

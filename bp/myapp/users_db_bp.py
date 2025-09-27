@@ -1,122 +1,101 @@
-from flask import Blueprint, request, redirect, render_template as render # type: ignore
+from flask import (
+  Blueprint, request, redirect, 
+  render_template as render, flash) # type: ignore
 from db import get_mydb as get_db # type: ignore
 
-users_db_bp = Blueprint("crud_db", __name__, url_prefix="/apps/users")
+bp = Blueprint("crud_db", __name__, url_prefix="/apps/users")
 
-@users_db_bp.route("/")
-def users_all():
-    page = int(request.args.get("page", 1))
-    per_page = 5  # 한 페이지에 5명씩
-    offset = (page - 1) * per_page
+@bp.route("/")
+def users_():
+  page = request.args.get("page", 1, type=int)
+  per_page = 10  # 한 페이지에 5명씩
+  offset = (page - 1) * per_page
 
-    db = get_db()
+  db = get_db()
 
-    with db.cursor() as cursor:
-      cursor.execute('SELECT * FROM users;')
-      users_page = cursor.fetchall()
+  with db.cursor() as cursor:
+    cursor.execute('SELECT * FROM users ORDER BY id DESC LIMIT %s OFFSET %s;', (per_page, offset))
+    users_page = cursor.fetchall()
+    print(users_page)
 
-    with db.cursor() as cur:
-      # 전체 사용자 수 구하기
-      cur.execute('SELECT COUNT(*) FROM users;')
-      total = cur.fetchone()[0]
+  with db.cursor() as cur:
+    cur.execute('SELECT COUNT(*) FROM users;')
+    total = cur.fetchone()[0]
 
-    users_list = getUsersList(users_page)
+  # 페이지네이션: 현재 페이지 기준으로 최대 5개 페이지만 표시
+  total_pages = (total // per_page) + (1 if total % per_page else 0)
+  users_page_len = len(users_page)
 
-    # 페이지네이션: 현재 페이지 기준으로 최대 5개 페이지만 표시
-    total_pages = (total // per_page) + (1 if total % per_page else 0)
-    start_page = max(1, page - 2)
-    end_page = min(total_pages, start_page + 4)
-    if end_page - start_page < 4:
-      start_page = max(1, end_page - 4)
-    page_links = ''
-    for i in range(start_page, end_page + 1):
-      if i == page:
-        page_links += f'<strong style="color: red;font-size:1.4rem;">{i}</strong> '
-      else:
-        page_links += f'<a href="/users/all?page={i}" style="color: blue;font-size:1.4rem;">{i}</a> '
-    next_page = getPage(page + 1, "Next") if len(users_page) == per_page else ''
-    prev_page = getPage(page - 1, "Prev") if page > 1 else ''
-    first_page = getPage(1, "First") if page > 1 else ''
-    last_page = getPage(total_pages, "Last") if page < total_pages else ''
-    pagination = f'''<div>
-      {first_page} {prev_page}
-      {page_links}
-      {next_page} {last_page}
-      </div>'''
+  start_page = max(1, page - 2)
+  end_page = min(total_pages, start_page + 4)
+  if end_page - start_page < 4:
+    start_page = max(1, end_page - 4)
 
-    new_users_list = f'''
-    <h1>전체 사용자 목록</h1>
-    <div class="links-list">
-      <a href="/users/create">Create User</a>
-      <a href="/users/">HOME</a>
-    </div>
-    {users_list}
-    {pagination}
-    '''
-    return body("users DB", new_users_list)
+  return render("myapp/users/users_home.html", users=users_page, page=page, total_pages=total_pages, start_page=start_page, end_page=end_page, users_page_len=users_page_len)
 
-def getPage(goto=1, label=""):
-  return f'''<button class="nav-button">
-        <a href="/users/all?page={goto}">
-        {label}</a></button>
-  '''
 
-@users_db_bp.route("/<int:id>")
+@bp.route("/<int:id>")
 def users_detail(id):
-  sel_user = select([users]).where(users.c.id == id)
-  user = ''
-  with engine.connect() as conn:
-    user = conn.execute(sel_user).fetchone()
-  user_detail = getUsersDetail(user)
-  return body("users DB", user_detail)
+  db = get_db()
+  with db.cursor() as cursor:
+    cursor.execute('SELECT * FROM users WHERE id = %s;', (id,))
+    user = cursor.fetchone()
+  return render("myapp/users/users_detail.html", user=user)
 
-@users_db_bp.route("/create", methods=["GET", "POST"])
+@bp.route("/create", methods=["GET", "POST"])
 def create_user():
   if request.method == "POST":
-    fname = request.form["first_name"]
-    lname = request.form["last_name"]
+    fname = request.form["firstname"]
+    lname = request.form["lastname"]
     email = request.form["email"]
+
+    error=None
     if not fname or not lname:
-      return redirect("/users/create")
-    stmt = insert(users).values(first_name=fname, last_name=lname, email=email)
-    with engine.connect() as conn: conn.execute(stmt)
-    return redirect("/users/all")
-  elif request.method == "GET":
-    return body("Create User", createUserForm())
-  return None
+      error = "이름은 필수입니다."
+    if error is not None:
+      flash(error)
+      return render("myapp/users/create_user.html")
+    else:
+      db = get_db()
+      with db.cursor() as cursor:
+        cursor.execute('INSERT INTO users (first_name, last_name, email) VALUES (%s, %s, %s);', 
+                       (fname, lname, email))
+        db.commit()
+      return redirect("/apps/users/")
+  return render("myapp/users/create_user.html")
 
 
-@users_db_bp.route("/<int:id>/edit", methods=["GET", "POST"])
+@bp.route("/<int:id>/edit", methods=["GET", "POST"])
 def edit_user(id):
+  db = get_db()
   if request.method == "POST":
-    fname = request.form["first_name"]
-    lname = request.form["last_name"]
+    fname = request.form["firstname"]
+    lname = request.form["lastname"]
     email = request.form["email"]
-    stmt = update(users).where(users.c.id == id).values(first_name=fname, last_name=lname, email=email)
-    with engine.connect() as conn: conn.execute(stmt)
-    return redirect("/users/all")
+    with db.cursor() as cursor:
+      cursor.execute('UPDATE users SET first_name = %s, last_name = %s, email = %s WHERE id = %s;', 
+                     (fname, lname, email, id))
+      db.commit()
+    return redirect("/apps/users/")
   elif request.method == "GET":
-    user = select([users]).where(users.c.id == id)
-    with engine.connect() as conn:
-      user = conn.execute(user).fetchone()
-    return body("Edit User", editUserForm(user))
+    with db.cursor() as cur:
+      cur.execute('SELECT * FROM users WHERE id = %s;', (id,))
+      user = cur.fetchone()
+    return render("myapp/users/edit_user.html", user=user)
   return None
 
-@users_db_bp.route("/<int:id>/delete", methods=["GET", "POST"])
+@bp.route("/<int:id>/delete", methods=["GET", "POST"])
 def delete_user(id):
+  db = get_db()
   if request.method == "POST":
-    stmt = delete(users).where(users.c.id == id)
-    with engine.connect() as conn: conn.execute(stmt)
-    return redirect("/users/all")
+    with db.cursor() as cursor:
+      cursor.execute('DELETE FROM users WHERE id = %s;', (id,))
+      db.commit()
+    return redirect("/apps/users/")
   elif request.method == "GET":
-    sel_user = select([users]).where(users.c.id == id)
-    with engine.connect() as conn:
-      user = conn.execute(sel_user).fetchone()
-    return body("Delete User", deleteUserForm(user))
+    with db.cursor() as cur:
+      cur.execute("SELECT * FROM users WHERE id = %s;", (id,))
+      user = cur.fetchone()
+    return render("myapp/users/delete_user.html", user=user)
   return None
 
-def getUsersList(users):
-  user_list = ''
-  for user in users:
-    user_list += f"<div>{user['firstname']} {user['lastname']} {user['email']}</div>"
-  return user_list

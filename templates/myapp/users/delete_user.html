@@ -1,0 +1,16 @@
+{% extends 'base/auth_base.html' %}
+
+{% block title %} MY Topic app {% endblock %}
+{% block header %}
+ Users List
+{% endblock %}
+  
+{% block content %}
+  <div class="link-list temp-list">
+    <a href="/apps/users/create">Create User</a>
+    <a href="/apps/users/">HOME</a>
+  </div>
+  <form action="/apps/users/{{  user['id'] }}/delete" method="POST">
+    <input type="submit" value="Delete">
+  </form>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base/auth_base.html' %}
+
+{% block title %} MY Topic app {% endblock %}
+{% block header %}
+ Users List
+{% endblock %}
+  
+{% block content %}
+  <div class="link-list temp-list" style="display: flex; justify-content: end;">
+    <a href="/apps/users/create">Create User</a>
+  </div>
+  {% for user in users %}
+  <div class="users-list" style="justify-content: space-between;">
+    <div  class="users-list">
+      <h4>{{ user['first_name'] }} </h4>
+      <h4>{{ user['last_name'] }} </h4>
+      <div>{{ user['email'] }}</div>
+      <div>{{ user['id'] }}</div>
+    </div>
+    <div>
+      <a class="action" href="/apps/users/{{ user['id'] }}/edit">EDIT</a> 
+      <a class="action" href="/apps/users/{{ user['id'] }}/delete">DELETE</a> 
+    </div>
+  </div>
+  {% endfor %}
+    <div class="link-list pagenation">
+   
+<a href="/apps/users/?page={{1 if page > 1 else ''}}">First</a>
+    <a href="/apps/users/?page={{page - 1 if page > 1 else ''}}">Pre</a>
+    {% for i in range(start_page, end_page + 1) %}
+      {% if i == page %}
+        <strong style="color: red;">{{i}}</strong>
+      {% else %}
+        <a class="page-link" href="/apps/users/?page={{i}}">{{i}}</a> 
+      {% endif %}
+    {% endfor %}
+
+    <a href="/apps/users/?page={{page + 1 if users_page_len == per_page else ''}}">Next</a>
+    <a href="/apps/users/?page={{total_pages if page < total_pages else ''}}">Last</a>
+
+  </div>
+{% endblock %}

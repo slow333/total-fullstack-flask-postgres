@@ -1,0 +1,17 @@
+{% extends 'base/auth_base.html' %}
+
+{% block title %} MY Topic app {% endblock %}
+{% block header %}
+ Edit topic
+{% endblock %}
+  
+{% block content %}
+
+  <form action="/topic/{{ topic.id }}/edit" method="post">
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" value="{{ topic.title }}">
+    <label for="content">Content</label>
+    <input type="text" name="content" id="content" value="{{ topic.content }}">
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}

@@ -1,12 +1,15 @@
-from flask import Blueprint, request, redirect # type: ignore
-from module.template import body_template as body
-from module.template import getNav as nav
-from module.template import topics
-from module.form_topic import getCreateForm, getEditForm, getDeleteForm
+from flask import (
+  Blueprint, request, redirect, render_template as render 
+) # type: ignore
 
-bp = Blueprint("main", __name__, url_prefix="/topic")
+bp = Blueprint("main", __name__, url_prefix="/apps/topic")
 
 nextId = 4
+topics = [
+    {"id": 1, "title": "Flask", "content": "Flask is a micro web framework for Python."},
+    {"id": 2, "title": "Django", "content": "Django is a high-level Python web framework."},
+    {"id": 3, "title": "FastAPI", "content": "FastAPI is a modern web framework for building APIs."}
+]
 
 def manage_topic_by_id(id, new_topic=None, delete=False):
   for topic in topics:
@@ -27,14 +30,14 @@ def create_topic():
     title = request.form["title"]
     content = request.form["content"]
     if not title or not content:
-      return redirect("/topic/create")
+      return redirect("/app/topic/create")
     new_topic = {"id": nextId, "title": title, "content": content}
     topics.append(new_topic)
-    url = "/topic/" + str(new_topic["id"])
+    url = "/app/topic/" + str(new_topic["id"])
     nextId += 1
     return redirect(url)
   elif request.method == "GET":
-    return body(nav(topics), getCreateForm())
+    return render("myapp/topic/create.html")
 
 @bp.route("/<int:id>/edit", methods=["GET", "POST"])
 def edit_topic(id):
@@ -43,34 +46,26 @@ def edit_topic(id):
     content = request.form["content"]
     new_topic = {"id": id, "title": title, "content": content}
     manage_topic_by_id(id, new_topic)
-    url = "/topic/" + str(new_topic["id"])
+    url = "/app/topic/" + str(new_topic["id"])
     return redirect(url)
   elif request.method == "GET":
     topic = manage_topic_by_id(id)
-    return body(nav(topics), getEditForm(topic))
+    return render("myapp/topic/edit.html", topic=topic)
 
 @bp.route("/<int:id>/delete", methods=["GET", "POST"])
 def delete_topic(id):
   if request.method == "POST":
     manage_topic_by_id(id, delete=True)
-    return redirect("/topic/")
+    return redirect("/app/topic/")
   elif request.method == "GET":
     topic = manage_topic_by_id(id)
-    return body(nav(topics), getDeleteForm(topic))
+    return render("myapp/topic/delete.html", topic=topic)
 
 @bp.route("/<int:id>")
 def topic_detail(id):
   topic = manage_topic_by_id(id)
-  content = f'''
-  <h1>{topic["title"]}</h1>
-  <p>{topic["content"]}</p>
-  '''
-  return body(nav(topics), content, id)
+  return render("myapp/topic/read.html", topic=topic, topics=topics)
 
 @bp.route("/")
 def topic_home():
-  content = f'''
-  <h1>CRUD 관련 페이지 입니다.</h1>
-  <p>여기에서 주제를 생성, 수정 및 삭제할 수 있습니다.</p>
-  '''
-  return body(nav(topics), content)
+  return render("myapp/topic/topic_home.html", topics=topics)

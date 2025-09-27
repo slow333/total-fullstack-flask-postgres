@@ -1,0 +1,15 @@
+{% extends 'base/auth_base.html' %}
+
+{% block title %} MY Topic app {% endblock %}
+{% block header %}
+ TOPICS
+{% endblock %}
+  
+{% block content %}
+<div class="link-list topic-list">
+  {% for topic in topics %}
+    <a class="action" href="/app/topic/{{ topic.id }}">{{ topic.title }}</a>
+  {% endfor %}
+  <a class="action" href="/app/topic/create">Create Topic</a>
+</div>
+{% endblock %}

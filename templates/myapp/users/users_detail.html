@@ -1,0 +1,14 @@
+{% extends 'base/auth_base.html' %}
+
+{% block title %} MY Topic app {% endblock %}
+{% block header %}
+ Users List
+{% endblock %}
+  
+{% block content %}
+  <div class="links-list">
+      <a href="/apps/users/create">Create User</a>
+      <a href="/apps/users/">HOME</a>
+  </div>
+  <div>{{ user['firstname'] }} {{ user['lastname'] }} {{ user['email'] }}</div>
+{% endblock %}

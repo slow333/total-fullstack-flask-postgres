@@ -18,16 +18,17 @@
   --text-md: 1rem;
   --text-sm: 0.9rem;
 
-  --color-blue: #0d6efd;
-  --color-indigo: #6610f2;
-  --color-orange: #fd7e14;
-  --color-green: #198754;
-  --color-red: #dc3545;
-  --color-yellow: #ffc107;
-  --color-pink: #ec4899;
-  --color-teal: #20c997;
-  --color-cyan: #0dcaf0;
-  --color-gray: #adb5bd;
+  --c-blue: #0d6efd;
+  --c-indigo: #6610f2;
+  --c-orange: #fd7e14;
+  --c-green: #198754;
+  --c-red: #dc3545;
+  --c-yellow: #ffc107;
+  --c-pink: #ec4899;
+  --c-teal: #20c997;
+  --c-cyan: #0dcaf0;
+  --c-gray: #adb5bd;
+  --c-dark-gray: #414447;
 
   --transition: 0.4s ease-in-out;
   --shadow: gray 0px 0px 10px 0px;
@@ -186,6 +187,27 @@ body {
   margin:0; padding:3px 0 0 0;
   text-decoration: none;
 }
+.curr-url {
+  border-bottom: 1px solid #666;
+}
+.navbar-btn.curr-url {
+  border-bottom: none;
+  border-top: 1px solid #666;
+  border-radius: 0;
+}
+/* ========= 공통 적용 =========== */
+.flash-message {
+  text-align: center;
+  padding: 10px;
+  margin: 2px auto;
+  width: 90%;
+  background-color: var(--c-red);
+  color:aliceblue;
+  font-size: var(--text-sm);
+}
+.flash-message:hover {
+  cursor: pointer;
+}
 
 header, h1 {
   font-size: 1.8rem;
@@ -193,12 +215,17 @@ header, h1 {
   text-align: center;
   font-family: var(--font-header);
   padding: 8px 0 4px 0;
-  border-bottom: 1px solid #444;
+  border-bottom: 1px solid var(--c-dark-gray);
   width: 90%;
   margin: 6px auto 0 auto;
 }
 main {
   padding: 6px 24px;
+}
+
+section {
+  border-bottom: 0.6px dotted #aaa;
+  padding: 0 0 14px 0;
 }
 
 h2, h3, h4, h5, h6 {
@@ -219,7 +246,6 @@ h3 {
 }
 h4 {
   font-size: 1.1rem;
-  /* color:rgb(0, 0, 85); */
   font-weight: 500;
   margin-top: 0.6rem;
 }
@@ -230,7 +256,7 @@ h5 {
 }
 h5::before {
   content: '• ';
-  color: rgb(59, 16, 0);
+  color: var(--c-indigo);
 }
 h6 {
   font-size: 1rem;
@@ -249,22 +275,9 @@ pre, xmp {
   /* background-color: #fcfcfc; */
   padding: 8px 12px;
   margin: 10px 0;
-  border-left: 1px solid rgb(212, 212, 212);
+  border-left: 1px solid var(--c-gray);
   line-height: 1.5;
   white-space: pre-wrap; word-break: break-all; overflow: auto;
-}
-.curr-url {
-  border-bottom: 1px solid #666;
-}
-.navbar-btn.curr-url {
-  border-bottom: none;
-  border-top: 1px solid #666;
-  border-radius: 0;
-}
-
-section {
-  border-bottom: 0.6px dotted #aaa;
-  padding: 0 0 14px 0;
 }
 
 #scrollTopBtn {
@@ -286,6 +299,8 @@ section {
 #scrollTopBtn:hover {
   background-color: #333;
 }
+
+/* ========= 콤퍼넌트 =========== */
 input {
   width:100%;
   padding: 10px;
@@ -296,12 +311,42 @@ button, input[type='submit']{
   padding: 10px;
   border: none;
   border-radius: 4px;
-  background-color: var(--color-blue);
+  background-color: var(--c-blue);
   color: white;
   cursor: pointer;
   font-size: var(--text-lg);
   text-decoration: none;
 }
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgb(32, 1, 1);
+}
 label {
-  font-size: var(--text-lg);
+  font-size: var(--text-md);
+}
+.link-list {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  justify-content: center;
+  gap: 6px;
+}
+.link-list a, a.action {
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--c-blue);
+  background-color: white;
+  border: 1px solid var(--c-blue);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: var(--text-sm);
+  transition: all 0.3s ease;
+}
+
+.link-list a:hover , a.action:hover {
+  text-decoration: underline;
 }

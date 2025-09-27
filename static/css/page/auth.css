@@ -1,34 +1,25 @@
-.auth-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* min-height: 50vh; */
-  /* font-size: calc(10px + 2vmin); */
-  color: rgb(32, 1, 1);
+.temp-list {
+  justify-content: start;
+}
+.temp-list a {
+  background-color: var(--c-green);
+  color: white;
 }
 
-.flash-message {
-  text-align: center;
-  padding: 10px;
-  margin: 2px auto;
-  width: 90%;
-  background-color: var(--color-red);
-  color:aliceblue;
-  font-size: var(--text-sm);
-}
-.flash-message:hover {
-  cursor: pointer;
-}
-.button-container {
+.users-list {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
+  gap:10px;
 }
-.button-container a {
-  display: inline-block;
-  text-decoration: none;
-  color:aliceblue;
+
+.pagenation {
+  display: flex;
+
+}
+.pagenation a.page-link {
+ border:none;
+ text-align: center;
+ margin: 0;
+ padding: 0 2px;
+ min-width: none;
 }
