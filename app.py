@@ -4,11 +4,15 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_super_secret_key_here'
 
 @app.route("/")
+@app.route("/home/")
 def index():
   return render("home.html")
 # ==============================
 # contents pages
 # ==============================
+from bp.routes.home_bp import bp as home_bp
+app.register_blueprint(home_bp)
+
 from bp.routes.python_bp import bp as python_bp
 app.register_blueprint(python_bp)
 

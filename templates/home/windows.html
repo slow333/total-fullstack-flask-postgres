@@ -1,0 +1,315 @@
+{% extends 'base/base.html' %}
+
+{% block title %} windows  {% endblock %}
+
+{% block header %} windows {% endblock %}
+
+{% block content %}
+<section>
+  <h2>윈도우 폴더 공유</h2>
+  <pre>폴더 > 공유 ...
+폴더 공유 > everyone : rw
+계정생성 > id, pass 지정
+
+접속하는 PC에서 신규로 생성된 계정을 사용해서 접속
+id : slow33
+pass: 1111</pre>
+</section>
+<section>
+  <h2>윈도우 기본 폴더 지우기</h2>
+  <pre>
+레지스트리 경로는 아래와 같습니다.
+
+32bit
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\
+
+64bit
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\
+HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace
+
+해당 경로명 아래에 각 각의 개체 폴더의 파일명은 아래와 같습니다.
+
+3D 개체: {0DB7E03F-FC29-4DC6-9020-FF41B59E513A}
+음악: {3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}
+다운로드: {088e3905-0323-4b02-9826-5d99428e115f}
+사진: {24ad3ad4-a569-4530-98e1-ab02f9417aa8}
+동영상: {f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}
+문서: {d3162b92-9365-467a-956b-92703aca08af}
+바탕화면: {B4BFCC3A-DB2C-424C-B029-7FE99A87C641}
+
+해당 레지스트리 경로명에서 삭제를 원하는 개체 폴더를 제거하시면 되세요.
+64비트의 경우에는 안내해 드린 2개의 경로명 모두 개체 폴더를 제거해주세요.
+  </pre>
+</section>
+<section> 
+  <h2>windows wsl</h2>
+  <pre>https://learn.microsoft.com/ko-kr/windows/wsl/install-manual#step-4---download-the-linux-kernel-update-package
+  
+  su passwd root
+  wsl --list --online ==> 설치가능한 목록을 보여줌
+  ------------------------------------
+  NAME                                   FRIENDLY NAME
+  Ubuntu                                 Ubuntu
+  Debian                                 Debian GNU/Linux
+  kali-linux                             Kali Linux Rolling
+  Ubuntu-18.04                           Ubuntu 18.04 LTS
+  Ubuntu-20.04                           Ubuntu 20.04 LTS
+  Ubuntu-22.04                           Ubuntu 22.04 LTS
+  Ubuntu-24.04                           Ubuntu 24.04 LTS
+  OracleLinux_7_9                        Oracle Linux 7.9
+  OracleLinux_8_7                        Oracle Linux 8.7
+  OracleLinux_9_1                        Oracle Linux 9.1
+  openSUSE-Leap-15.5                     openSUSE Leap 15.5
+  SUSE-Linux-Enterprise-Server-15-SP4    SUSE Linux Enterprise Server 15 SP4
+  SUSE-Linux-Enterprise-15-SP5           SUSE Linux Enterprise 15 SP5
+  openSUSE-Tumbleweed                    openSUSE Tumbleweed
+  -------------------------------
+  wsl --install -d OracleLinux_8_7 
+  ==> 실행됨
+  wsl -l -v
+  ==> 해당 버젼을 다운 받아서 실행 해야함.
+  해당 리눅스를 열기하면... 어디서 하지 ???
+  실행 하면 죽음... 이유가 뭐지 ==> 
+  > wsl.exe --update ==> wsl version 2를 설치함
+  > wsl --set-default-version 2
+  > wsl -l -v ==> 설치된 버전과 상태를 알려줌
+  > id, password를 지정 : kalpa      1111
+  > wsl --shutdown
+  >  wsl --distribution OracleLinux_8_7 --user kalpa
+  
+  System has not been booted with systemd as init system
+  ==> 원인은 WSL은 루트 시스템 프로세스가 systemd가 아닌 init이기 때문입니다
+  /etc/wsl.conf
+  [boot]
+  systemd=true
+  ==> rebooting</pre>
+</section>
+<section>
+  <h2>password</h2>
+  <pre>git; slow333 / dongwook0#
+
+access.broadcom.com
+login.broadcom.com
+
+slow33@gmail.com / Kimjinseo0#
+
+login.coupang.com
+kimjinseo14@naver.con dongwook0#
+
+slow33@gmail.com Dongwook0#
+
+prd.kr-ccapi.hyundai.com
+slow33@gmail.com / dongwook0#
+
+accounts.google.com
+ml.python.ai@gmail.com  /  dongwook0#
+
+account.jetbrains.com
+irobowook@gmail.com  /  kimdongwook0#
+
+mmbr.kyobobook.co.kr
+dongwook0#
+
+login.microsoftonline.com
+slow33@whynet1.onmicrosoft.com  /  dongwook0#
+    
+
+login.live.com
+slow33@live.co.kr  / dongwook03
+
+signup.live.com
+kalpa@kalpa.com  / dongwook0#
+
+Netflix(넷플릭스) www.netflix.com
+jewelryjim@gmail.com  /  kkyong95
+
+sso.redhat.com
+ml.python.ai@gmail.com /   dongwook0#
+
+career.sw.or.kr
+slow33   /  dongwook0#
+
+spring.academy
+slow33@gmail.com   /   Kimdongwook0#
+
+customerconnect.vmware.com
+slow33@gmail.com  /  Kimdongwook0#
+
+
+############### google keeps ###########
+집와이파이 : @28F2582K3
+
+[휴대폰]
+휴대폰 암호 : 짧은 ㄴ  입니다.
+애플  slow33@naver.com   / Kimjinseo05
+인증서 : 5864739j@@
+마눌휴대폰 166141
+진서아이폰 : kimjinseo14@icloud.com 58643049Js@
+진서 휴대폰:  123014   0923
+진서 livv : kimjinseo14 / kimjinseo05
+LiivM (아들): iroKbowook   3049w
+아이핀 slow3333/kkyong9%/dongwook03
+삼성관련 kkyong95 또는 661458 
+헬로모바일 : dwjs0704     패스워드. 5864739j#
+엄마 휴대폰    dongwook0#
+Nas. slow33    Dongwook0#   시작 대문자
+넷플릭스: jewerlyjim@gmail.com kkyong95
+
+[이메일]
+slow33 gmail : Kimdongwook0#
+ ml.python.ai.  Kimdongwook0#
+ /다음 :dongwook0#
+naver: kimdongwook0#
+Kakao : kalpa@kakao.com / dongwook0#
+네이트 : spinenet / dongwook0#
+회사메일: slo33@whynet.co.kr dongwook0#
+MS: slow33@live.co.kr/dongwook03
+outlook.com: dawonict@outlook.com / kkyong95
+마눌 Gmail : jewelryjim / 5864739w
+
+slow33, logcenter.kr, ml.python.ai, 
+vkorea.fighting,victory.korea.fighting, koreaubuntu0
+me.self.esteem, seejak33
+
+[쇼핑]
+g마켓 ; 5864739j0d / 11번가 : dongwook0#
+옥션 : dongwook0##
+인터파크 : dongwook0# 또는 5864739j#
+Sk encar : slow333 / dongwook0#
+Paypal : slow33@gmail.com / kkyong95
+Aliexpress : google 로 로그인
+amazon.com : slow33@naver.com / kkyong95
+코레일 1240733369 / dongwook0#
+교보문고 : slow33    kkyong95   ==> 전자책
+스마일페이 인증번호 586430
+g마켓 : 5864739j0d
+쿠팡. slow33@gmail.com Dongwook0#
+쿠팡플레이. kimjinseo14@naver.con  dongwook0#
+Neflex : jewelryjim@gmail.com   kkyong95
+
+[금융]
+하나sk카드 안심 클릭 비번 :kkyong95
+하나sk카드 웹 ID/PASS : slow33 / kkyong9%
+하나 ISP 비밀번호 : kkyong95
+하나은행 : 026614
+시티은행: 403-15234-265-01 /slow33 / Kkyong95(대 K)
+우리카드(개인)웹 : slow333 / kkyong95
+우리카드 isp/휴대폰 인증 : 166141
+우리카드비번 : 5864
+우리은행 : 1002-153-970281
+1002153970281
+우리은행 ; 이용자비번- dwjs0704
+홈텍스 비번 : 5864739#j
+
+[클라우드]
+아마존(awa) : ml.python.ai@gmail.com  dongwook0#
+원드라이브 slow33@live.co.kr dongwook03
+Github : slow333 /dongwook0# (slow33@gmail.com)
+Evernote; slow33@gmail.com / dongwook03
+오페라 : slow33@gmail.com/kimdongwook0303
+redhat : slow33  or slow33@gmail.com  Kimdongwook0#
+Cisco :   slow33@gmail.com    Kimdongwook0#
+vmware:  slow33@gmail.com    Dongwook0#
+netflix.    jewelryjim@gmail.com dongwook0#
+ESXI : 폴더로 가서 vmware파일 실행 하면 웹 IP나옴
+ web 접속 후 => root 암호 없이 enter치면 들어가짐
+supabase.com(git login): booking app project password: Kimdongwook0#
+
+Broadcom.com. slow33@gmail.com. Kimjinseo0#
+
+[SNS]
+카톡 : kalpa@kakao.com / Dongwook0#
+Facebook : ml.python.ai@gmail.com/dongwook0#
+트위터 : kalpaaa  / kkyong95
+팟빵 : slow33@gmail.com dongwook0#
+Facebook 5864739j#  / 카카오 5864739&d
+
+[홈페이지]
+cj 관련slow33/ dongwook0#
+Nike : slow33@gmail.com  Dongwook03
+명함 camcard / dongwook03 or kkyong95
+국세청 : slow33 / dongwook0#
+민원24 : dwjs0704 / 5864739w!!!
+마눌 sk; dwjs0174 / 5864739w
+멜론 : slow3333. kkyong95
+소프트웨어기술자 : slow33/khqInmpr
+교보문고 전자책 : slow33 dongwook0# kaka talk ap 연결
+
+[개인]
+사무실pc : 5864 /내 학번 : 713034   
+파일암호화 : tjict6006 또는 6006
+개인통관번호 : P681144885479
+
+[회사]
+7층wifi: ...857A / 3fgd6ee451
+회사인증서 : whynet2014&
+wifi : whynet2010
+회사 암호:    2014별
+Smtech :  slow33 / dongwook03#
+법인등록번호 : 160111-0274607
+파일서버 (92.168.35.41) : NAS2 slow33 / kkyong95
+파일서버 Level1(192.168.35.40) : NAS1
+법인인감카드 : 00001418969  / pass;100218
+와이넷 홈페이지 관리    whynet.co.kr/adm
+ID : admin      pass : whynet18
+
+[기타]
+처가집  => 1328     xf72zh5869
+이교과서.kr ( 1544-0079 )  P8E6Q70GJ4
+
+[각종 시리얼]
+오피스365 5PC용   G2114@y365.me  dongwook0#
+오피스365 회사 slow33@whynet1.onmicrosoft.com   dongwook0#
+
+windows 10 pro 시리얼 구매-회사
+P22VP-R7N46-9BX8G-TMFG9-Y7V3B
+
+windows 10 serial - 집에 것
+QJNXR-YD97Q-K7WH4-RYWQ8-6MT6Y
+
+
+VMware Workstation 16 Pro for Linux and Windows, ESD
+NJ08Q-6GKDK-H8VJ3-0H3HH-2JCL4
+
+WMWare Workstation 15.5.2 build-15785246 serial(for centos)
+CU3MA-2LGIN-48EGQ-9GNGZ-QG0UD
+
+intellij
+irobowook@gmail.com
+kimdongwook0#
+
+2272009@365.mokwon.ac.kr
+58643049ww!
+
+SecureCrt 8.3
+Name  nukuge
+Serial num 03-00-213473
+Key ACEPA6 UGTNNE RZUYHW YC43WB ABKKSE QTE58J 4QEGP2 DXAQU7
+issue 06-14-2018
+
+Securcrt 7.2.5
+AxiomInfo
+AxiomInfo
+
+03-73-002115
+
+ACT5TX P4ME6D 4H88EP BH276C AC46XM 5K1AMK JYE4ZX V4DUXG
+08-28-2014
+############
+takeown /f "D:\view\무도\2014" /r
+icacls "D:\view\무도\2014" /grant Administrators:F /T
+icacls "D:\onedrive" /grant Administrators:F /T
+
+쉬프트. 콘트롤 o. 영어오
+### domain hosting
+빈 구글 계정 => google drive > my drive > www.logcenter.info 폴더에 index.html과 관련 파일 넣기 > 공유에서 모두 허용
+> drv.tw에서 해당 폴더 접속 허용 > 관련 url을 줌
+https://wzdkbcytereozu0jpmicvw.on.drv.tw/www.logcenter.info/
+> 이걸로도 접속 가능하나 > dns 만들어서 연결
+>namecheap.com > logcenter.info 구매했음 > domain list > advanced DNS
+> CNAME record : host => www, value => wzdkbcytereozu0jpmicvw.on.drv.tw
+    ttl => 30 min  save changes
+> URL Redirect Record : host => @, value => http://logcenter.info
+   save changes</pre>
+</section>
+{% endblock %}

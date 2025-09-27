@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+
+{% block title %} Git {% endblock %}
+
+{% block header %} Git setting {% endblock %}
+
+{% block content %}
+<section>
+<h3>git; command shell</h3>
+  <pre>git init // 초기 시작시 에만 필요
+git add .
+git branch -M main // 초기 시작시 에만 필요
+git remote add origin git@github.com:slow333/js-spring-home.git // 초기 시작시 에만 필요
+git commit -m 'comments what i want'
+git push -u origin main
+
+git remote remove git@github.com:slow333/js-spring-home.git 
+
+애러 나면
+git push -u origin +main
+
+뭐 다른 애러 나면 ... 또 찾아서
+</pre>
+</section>
+
+{% endblock %}

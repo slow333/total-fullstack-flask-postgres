@@ -32,17 +32,8 @@
       <hr>
     {% endif %}
   {% endfor %}
-    <div class="link-list pagenation">
-      <a href="/apps/blogs/?page={{1 if page > 1 else ''}}">First</a>
-      <a href="/apps/blogs/?page={{page - 1 if page > 1 else ''}}">Pre</a>
-      {% for i in range(start_page, end_page + 1) %}
-        {% if i == page %}
-          <strong style="color: red;">{{i}}</strong>
-        {% else %}
-          <a class="page-link" href="/apps/blogs/?page={{i}}">{{i}}</a> 
-        {% endif %}
-      {% endfor %}
-      <a href="/apps/blogs/?page={{page + 1 if blogs_page_len == per_page else ''}}">Next</a>
-      <a href="/apps/blogs/?page={{total_pages if page < total_pages else ''}}">Last</a>
-  </div>
+
+  {% with target_app="blogs", page=page, total_pages=total_pages, per_page=per_page, page_length=blogs_page_len, start_page=start_page, end_page=end_page %}
+      {% include 'myapp/pagenation.html' with context %}
+  {% endwith %}
 {% endblock %}

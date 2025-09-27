@@ -35,8 +35,10 @@ def users_():
   if end_page - start_page < 4:
     start_page = max(1, end_page - 4)
   
-  return render("myapp/todo/todo_home.html", todos=todo_page, page=page, total_pages=total_pages, start_page=start_page, end_page=end_page, todo_page_len=todo_page_len)
-
+  return render("myapp/todo/todo_home.html", 
+                todos=todo_page, page=page, total_pages=total_pages, 
+                start_page=start_page, end_page=end_page, 
+                todo_page_len=todo_page_len)
 
 @bp.route("/create", methods=["GET", "POST"])
 @login_required

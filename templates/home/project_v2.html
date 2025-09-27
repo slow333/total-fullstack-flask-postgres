@@ -1,0 +1,216 @@
+{% extends 'base/base.html' %}
+
+{% block title %} Flask setting {% endblock %}
+
+{% block header %} Flask setting {% endblock %}
+
+{% block content %}
+<section>
+<h2>상위 버젼의 python, flask 등을 사용했을 때 구성</h2>
+<h4>python version에 따라 pip에서 설치되는 flask version, sqlalchemy, psycopg2 버전이 다름</h4>
+<h3>python 3.13 버젼 기준</h3>
+<pre>
+  Package           Version
+  ----------------- -------
+  blinker           1.9.0
+  click             8.2.1
+  colorama          0.4.6
+  Flask             3.1.2
+  greenlet          3.2.4
+  itsdangerous      2.2.0
+  Jinja2            3.1.6
+  MarkupSafe        3.0.2
+  pip               25.2
+  psycopg2-binary   2.9.10
+  SQLAlchemy        2.0.43
+  typing_extensions 4.15.0
+  Werkzeug          3.1.3
+</pre>
+<p>이 버전에서 flask --app flaskr run --debug 가능함<br>
+__init__.py 설정도 상위 python version에서 가능함</p>
+<pre>
+flaskr/__init__.py
+import os
+
+from flask import Flask
+
+def create_app(test_config=None):
+    # create and configure the app
+    app = Flask(__name__, instance_relative_config=True)
+    app.config.from_mapping(
+        SECRET_KEY='dev',
+        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
+    )
+
+    if test_config is None:
+        # load the instance config, if it exists, when not testing
+        app.config.from_pyfile('config.py', silent=True)
+    else:
+        # load the test config if passed in
+        app.config.from_mapping(test_config)
+
+    # ensure the instance folder exists
+    try:
+        os.makedirs(app.instance_path)
+    except OSError:
+        pass
+
+    # a simple page that says hello
+    @app.route('/hello')
+    def hello():
+        return 'Hello, World!'
+
+    return app
+</pre>
+<h4>run app : flask --app flaskr run --debug</h4>
+</section>
+<section>
+  <h3>database 연결 설정(psycopg2)</h3>
+  <pre>
+flaskr/db.py
+from flask import current_app, g
+
+DATABASE = 'postgresql://postgres:1111@localhost/flaskr'
+
+def get_db():
+  if 'db' not in g:
+    g.db = psycopg2.connect(DATABASE, cursor_factory=psycopg2.extras.DictCursor)
+  return g.db
+
+def close_db(e=None):
+  """Close the database connection."""
+  db = g.pop('db', None)
+
+  if db is not None:
+    db.close()
+
+def init_db():
+  db = get_db()
+
+  with current_app.open_resource('schema.sql') as f:
+    # psycopg2 requires a cursor to execute commands
+    with db.cursor() as cur:
+      cur.execute(f.read().decode('utf8'))
+  # Commit the changes to make them persistent
+  db.commit()
+
+@click.command('init-db')
+def init_db_command():
+  """Clear the existing data and create new tables."""
+  init_db()
+  click.echo('Initialized the PostgreSQL database.')
+
+def init_app(app):
+  """Register database functions with the Flask app."""
+  app.teardown_appcontext(close_db)
+  app.cli.add_command(init_db_command)    
+  
+  ### run : flask --app flaskr init-db
+  </pre>
+  <h4>__init__.py 설정</h4>
+  <pre>
+  from . import db
+  db.init_app(app)
+  </pre>
+</section>
+<section>
+  <h4>psycopg2에서 query 객체를 dict처럼 사용 하기 위해서 (user['id'])</h4>
+  <h5>DictCursor 사용: cursor_factory=psycopg2.extras.DictCursor</h5>
+  <pre>
+import psycopg2 # type: ignore
+import psycopg2.extras
+from flask import g
+from flask import current_app # type: ignore
+
+db_url_mydb = "postgresql://postgres:1111@localhost/mydb"
+db_url_flaskdb = "postgresql://postgres:1111@localhost/flaskr"
+
+def get_mydb():
+  if 'mydb' not in g:
+    g.mydb = psycopg2.connect(db_url_mydb, cursor_factory=psycopg2.extras.DictCursor)
+  return g.mydb
+  </pre>
+  <h4>set env run script</h4>
+<pre>
+$ cat ~/.bashrc
+alias start="source /b/python/flask-tutorial/.venv/Scripts/activate"
+alias run="flask --app flaskr run --debug"
+
+# flask_crud 
+### To run the app, 
+### bash: export FLASK_APP=pybo, export FLASK_DEBUG=true , flask run
+### cmd : set FLASK_APP=pybo, set FLASK_DEBUG=true, flask run
+</pre>
+  <h3>export path로 프로젝트 루트를 등록</h3>
+</section>
+
+
+<section>
+  <h3>flask seesion 관리</h3>
+    <h4>g 객체</h4>
+  <p>g is a special object that is unique for each request. It is used to store data that might be accessed by multiple functions during the request. The connection is stored and reused instead of creating a new connection if get_db is called a second time in the same request.
+  </p>
+  <h4>세션의 작동 방식</h4>
+  <p>Flask는 웹 애플리케이션에서 사용자별 데이터를 저장하고 관리하기 위해 세션(Session) 기능을 제공합니다. Flask의 세션은 기본적으로 클라이언트의 브라우저에 저장되는 쿠키 기반(cookie-based) 방식입니다.</p>
+  <ul>
+    <li>세션 생성: 사용자가 웹사이트에 접속하면, Flask는 고유한 세션 ID를 가진 세션 객체를 생성합니다.</li>
+    <li>데이터 저장: 개발자는 이 세션 객체에 데이터를 딕셔너리처럼 저장할 수 있습니다 (예: session['username'] = 'Alice').</li>
+    <li>암호화된 쿠키: Flask는 이 데이터를 서버에 저장하지 않고, 서명된(signed) 쿠키 형태로 사용자에게 보냅니다. 이 쿠키는 SECRET_KEY로 암호화되어 있어 위변조가 불가능합니다.</li>
+    <li>다음 요청: 사용자가 다음 요청을 보낼 때, 브라우저는 이 쿠키를 다시 서버로 전송하고, Flask는 이를 복호화하여 세션 데이터를 불러옵니다.</li>
+  </ul>
+  <h4>세션 사용을 위한 필수 설정: SECRET_KEY</h4>
+  <p>세션 데이터를 안전하게 암호화하기 위해서는 반드시 SECRET_KEY를 설정해야 합니다. 이 키는 외부에 노출되지 않도록 안전하게 관리해야 합니다.</p>
+  <pre>
+from flask import Flask
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'your_super_secret_key_here'
+  </pre>
+  <h4>세션 사용 예제</h4>
+  <p>세션을 사용하려면 Flask의 session 객체를 임포트해야 합니다. session은 g 객체처럼 현재 요청의 컨텍스트에 바인딩된 프록시 객체입니다.<br>사용자 아이디를 세션에 저장하여 로그인 상태를 유지하는 예시입니다.</p>
+<pre>
+from flask import Flask, session, redirect, url_for, request, render_template
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'your_super_secret_key_here'
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        # 로그인 성공 시, 세션에 사용자 정보 저장
+        session['username'] = username
+        return redirect(url_for('profile'))
+    return render_template('login.html')
+
+@app.route('/profile')
+def profile():
+    # 세션에 'username'이 있는지 확인하여 로그인 여부 체크
+    if 'username' in session:
+        return f"Hello, {session['username']}!"
+    return redirect(url_for('login'))
+
+@app.route('/logout')
+def logout():
+    # 세션에서 사용자 정보 제거
+    session.pop('username', None)
+    return redirect(url_for('login'))
+
+if __name__ == '__main__':
+    app.run(debug=True)
+</pre>
+<h4>세션 설정 옵션</h4>
+<ul>
+  <li>app.config를 통해 세션의 동작을 제어할 수 있습니다.</li>
+  <li>SESSION_COOKIE_NAME: 세션 쿠키의 이름 (기본값: 'session').</li>
+  <li>SESSION_COOKIE_SECURE: True로 설정하면 HTTPS 연결에서만 쿠키를 전송합니다. 프로덕션 환경에서는 이 설정을 활성화하는 것이 좋습니다.</li>
+  <li>PERMANENT_SESSION_LIFETIME: 세션의 유효 기간(초 단위)을 설정합니다. session.permanent = True로 설정해야 적용됩니다. 기본값은 31일입니다.</li>
+  <li>SESSION_COOKIE_DOMAIN: 쿠키를 사용할 도메인을 지정합니다.
+</ul>
+  <pre>
+app.config['SESSION_COOKIE_SECURE'] = True
+app.config['PERMANENT_SESSION_LIFETIME'] = 3600 # 1시간
+  </pre>
+</section>
+
+{% endblock %}

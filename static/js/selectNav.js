@@ -30,6 +30,9 @@ async function setSubMenus(item){
   });
   document.querySelector('#'+item)?.classList.add('curr-url');
   switch (item) {
+    case 'home':
+      await loadByFile('/static/nav-html/_home-nav.html');
+      break;
     case 'python':
       await loadByFile('/static/nav-html/_python-nav.html');
       break;
